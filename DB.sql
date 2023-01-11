@@ -1,12 +1,10 @@
--- 作成日：2023/1/10
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- データベース：test01を作成
+-- データベース：cut_house_noonを作成
 CREATE DATABASE cut_house_moon;
 
--- データベース：test01上で作業することを宣言
+-- データベース：cut_house_noon上で作業することを宣言
 USE cut_house_moon;
 
 -- テーブル：empty_statusesを作成
