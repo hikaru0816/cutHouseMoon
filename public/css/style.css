@@ -1,0 +1,1288 @@
+/* common */
+body {
+    background-color: rgb(246, 246, 246);
+}
+
+main {
+    padding-top: 70px;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+p, h2, h3 {
+    color: rgb(50, 50, 50);
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-content {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-content label, .form-content button, .form-content input {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.btn-info {
+    color: white;
+}
+
+.btn-info:hover {
+    color: white;
+}
+
+.rice-mark {
+    padding-left:1em;
+    text-indent:-1em;
+    font-size: 16px;
+}
+
+.validation-error-message {
+    color: red;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.back-btn-container {
+    text-align-last: left;
+}
+
+.back-btn {
+    font-size: 19px;
+    color: rgb(57, 57, 57);
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    color: rgb(129, 129, 129);
+}
+
+.delete-btn {
+    color: red;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    color: rgb(200, 0, 0);
+}
+
+.confirm-content {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.confirm-content-vertical {
+    flex-direction: column;
+}
+
+.confirm-title {
+    position: relative;
+    margin-right: 10px;
+    word-break: keep-all;
+}
+
+.confirm-title p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.confirm-title-verticle p {
+    color: gray;
+    line-height: 1;
+}
+
+.confirm-title, .confirm-body {
+    border-bottom: 2px solid #000;
+    padding: 0 3px;
+}
+
+.confirm-body {
+    word-break: break-all;
+}
+
+.confirm-body-verticle {
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
+.modify-btn {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.next-btn {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* header */
+.header {
+    width: 100%;
+    padding: 5px 0;
+    z-index: 999;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.header-left, .header-center, .header-right, .header-left img {
+    height: 60px;
+}
+
+.header-left {
+    margin-right: 90px;
+}
+
+.header-left img {
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.header-left, .header-right .unlogin, .header-center, .header-right .login {
+    display: flex;
+    align-items: center;
+}
+
+.header-center div {
+    margin-right: 20px;
+}
+
+.header-center a, .small-menu a {
+    color: rgb(50, 50, 50);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color .3s;
+}
+
+.header-center a:hover, .small-menu a:hover {
+    color: rgba(50, 50, 50, 0.5);
+}
+
+.unlogin, .login {
+    line-height: 60px;
+}
+
+.unlogin div:first-child, .login div:first-child {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.header-right .btn, .small-unlogin .btn, .small-login .btn {
+    width: 112px;
+    color: white;
+    font-weight: bold;
+}
+
+.hambarger {
+    display: none;
+}
+
+.small-nav {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 70px);
+    top: 70px;
+    z-index: 20;
+    transform: translateX(100%);
+    transition: all .3s;
+}
+
+.small-nav.active {
+    transform: translateX(0);
+}
+
+.small-menu-left {
+    width: 60%;
+    height: 100%;
+    opacity: 0;
+}
+
+.small-menu-right {
+    width: 40%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.small-menu div, .small-unlogin div, .small-login div {
+    margin-bottom: 20px;
+}
+
+.small-unlogin .btn {
+    width: 100px;
+    color: white;
+    font-weight: bold;
+}
+
+/* top */
+.top {
+    position: relative;
+    height: calc(100vh - 70px);
+
+}
+
+.img-container {
+    position: relative;
+    height: 100%;
+}
+
+.top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+}
+
+.empty-status {
+    background-color: rgba(246, 246, 246, 0.5);
+    text-align: center;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+}
+
+.empty-status .content {
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.top-message {
+    z-index: 1;
+    position: absolute;
+    bottom: 5%;
+    left: 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding:  15px 20px;
+    border-radius: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-right: 40px;
+}
+
+/* about */
+#about {
+    padding: 70px 0;
+}
+
+#about h2 {
+    padding-bottom: 20px;
+}
+
+#about .content-container {
+    display: flex;
+    position: relative;
+}
+
+#about img {
+    width: 55%;
+    object-fit: cover;
+    margin-right: 50px;
+}
+
+.about-message {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(55% + 50px);
+    font-size: 20px;
+}
+
+.about-message td {
+    padding-left: 7px;
+}
+
+/* menu */
+#menu {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 70px 0;
+}
+
+#menu .content-container {
+    text-align: center;
+}
+
+#menu h2 {
+    margin: 0;
+}
+
+.menu-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.menu-list {
+    margin-top: 20px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(205, 205, 205);
+    width: calc(50% - 20px);
+}
+
+.menu-list p {
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+/* access */
+#access .content-container {
+    text-align: center;
+    padding: 70px 0;
+}
+
+#access p {
+    font-size: 20px;
+}
+
+#access #map {
+    margin: 0 auto;
+    height: 600px;
+    border: 2px solid black;
+}
+
+/* go-to-page-top */
+.go-to-page-top {
+    display: inline-block;
+    text-decoration: none;
+    z-index: 10;
+    position: fixed;
+    right: 40px;
+    bottom: -50px;
+    background-color: black;
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.go-to-page-top:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+/* footer */
+footer {
+    background-color: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+footer .content-container {
+    display: flex;
+    justify-content: center;
+}
+
+footer img {
+    object-fit: cover;
+    width: 200px;
+}
+
+.footer-shop-info {
+    margin-right: 20px;
+}
+
+.footer-menu a {
+    color: rgb(50, 50, 50);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color .3s;
+}
+
+.footer-menu a:hover {
+    color: rgba(50, 50, 50, 0.5);
+}
+
+.copyright {
+    text-align: center;
+    font-size: 12px;
+}
+
+/* register */
+#register {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#register .btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#register .btn-container a {
+    margin: 0 10px;
+}
+
+/* login */
+#login {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* manager */
+/* empty-status */
+#empty-status {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#empty-status .form-content {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#empty-status label {
+    width: 80px;
+    margin: 0;
+    text-align: right;
+}
+
+#empty-status select {
+    font-size: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2;
+}
+
+#empty-status button {
+    width: 100%;
+}
+
+.all-reservations a, #manager-menu a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* reservation */
+#reservation {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #fff;
+}
+
+#reservation table, #reservation th, #reservation td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#reservation table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#reservation th, #reservation td {
+    padding: 0 5px;
+}
+
+#reservation tbody tr:nth-child(odd) {
+    background-color: rgb(200, 200, 200);
+}
+
+#reservation .btn-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#reservation .btn-container a {
+    display: inline-block;
+}
+
+#reservation .btn-content {
+    margin-top: 10px;
+}
+
+#reservation button {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+/* manager-menu */
+#manager-menu {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#manager-menu .content-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#manager-menu .manager-menu-content {
+    width: 50%;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* error */
+#error {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#error .content-container p {
+    color: red;
+    font-size: 20px;
+}
+
+/* mypage */
+/* customer-name */
+#customer-name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#customer-name p {
+    margin-left: 20px;
+}
+
+/* check-reservation */
+#check-reservation {
+    padding-bottom: 30px;
+}
+
+#check-reservation h2 {
+    margin-bottom: 10px;
+}
+
+#check-reservation .content-container {
+    text-align: center;
+    font-size: 20px;
+}
+
+#check-reservation table {
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+#check-reservation th, #check-reservation td {
+    padding: 0 5px;
+}
+
+#check-reservation table, #check-reservation th, #check-reservation td {
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+
+/* reservate */
+#reservate {
+    padding-bottom: 50px;
+}
+
+#reservate .wrapper {
+    text-align: center;
+}
+
+#reservate .wrapper a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* booking */
+#booking {
+    padding-bottom: 50px;
+}
+
+#booking .form-select {
+    padding: 6px 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#booking option {
+    font-weight: bold;
+}
+
+#booking .date-info {
+    text-align: left;
+}
+
+#booking .confirm {
+    width: auto;
+    margin: 0 auto;
+}
+
+#booking .confirm-title {
+    width: 120px;
+}
+
+#booking .confirm-body {
+    width: 200px;
+}
+
+#booking .btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#booking .btn-container a {
+    margin: 0 10px;
+}
+
+#booking .form-content {
+    margin-top: 0;
+}
+
+#booking-finish .aa {
+    text-align: center;
+}
+
+/* edit-reservation */
+#edit-reservation {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#edit-reservation .content-container {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#edit-reservation table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+    writing-mode: vertical-lr;
+}
+
+#edit-reservation th, #edit-reservation td {
+    writing-mode: horizontal-tb;
+}
+
+#edit-reservation table, #edit-reservation th, #edit-reservation td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#edit-reservation th, #edit-reservation td {
+    padding: 0 5px;
+}
+
+#edit-reservation .rice-mark {
+    text-align: left;
+}
+
+#edit-reservation label, #edit-reservation input, #edit-reservation select {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#edit-reservation .form-select {
+    padding: 6px 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#edit-reservation .confirm {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+#edit-reservation .confirm-title {
+    width: 80px;
+}
+
+#edit-reservation .confirm-body {
+    width: calc(100% - 90px);
+    text-align: left;
+}
+
+#edit-reservation .add-reservation-confirm .confirm-title {
+    width: 120px;
+}
+
+#edit-reservation .add-reservation-confirm .confirm-body {
+    width: 200px;
+}
+
+#edit-reservation .btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#edit-reservation .btn-container a {
+    margin: 0 10px;
+}
+
+#edit-reservation .form-content {
+    margin-top: 0;
+}
+
+#edit-reservation .a {
+    text-align: center;
+}
+
+/* update-reservation */
+#update-reservation {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#update-reservation .confirm {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+#update-reservation .confirm-title {
+    width: 80px;
+    text-align: center;
+}
+
+#update-reservation .confirm-body {
+    width: calc(100% - 90px);
+    text-align: left;
+}
+
+.update-reservation-content {
+    margin-top: 20px;
+}
+
+.update-reservation-content .confirm-content-vertical {
+    margin-top: 10px;
+}
+
+.update-reservation-content h4 {
+    margin-bottom: 0;
+}
+
+.update-reservation-content .confirm-title {
+    margin: 0 auto;
+    border-bottom: none;
+    height: 20px;
+}
+
+.update-reservation-content .confirm-body-update {
+    width: calc((100% - 50px) / 2);
+    text-align: center;
+    border-bottom: 2px solid black;
+    word-break: break-all;
+}
+
+.update-reservation-content .arrow {
+    width: 50px;
+}
+
+/* show-all-reservations */
+#show-all-reservations {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#show-all-reservations table, #show-all-reservations th, #show-all-reservations td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#show-all-reservations table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#show-all-reservations th, #show-all-reservations td {
+    padding: 0 5px;
+}
+
+#show-all-reservations tbody tr:nth-child(odd) {
+    background-color: rgb(200, 200, 200);
+}
+
+#show-all-reservations button {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+/* regist-complete */
+#regist-complete {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#regist-complete .content-container {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#regist-complete a {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* resetPassword */
+#reset-password {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.label-left {
+    text-align: left;
+}
+
+/* show-cut-menu */
+#show-cut-menu {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#show-cut-menu table, #show-cut-menu th, #show-cut-menu td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#show-cut-menu table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#show-cut-menu th, #show-cut-menu td {
+    padding: 0 5px;
+}
+
+#show-cut-menu tbody tr:nth-child(odd) {
+    background-color: rgb(200, 200, 200);
+}
+
+#show-cut-menu tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+#show-cut-menu button {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+#show-cut-menu .add-menu-btn {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#show-cut-menu .add-menu-btn a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#show-cut-menu .delete-menu-btn {
+    color: red;
+}
+
+#show-cut-menu .delete-menu-btn:hover {
+    color: rgb(200, 0, 0);
+}
+
+/* edit-cut-menu */
+#edit-cut-menu {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#edit-cut-menu .content-container {
+    text-align: center;
+}
+
+#edit-cut-menu table, #edit-cut-menu th, #edit-cut-menu td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#edit-cut-menu table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#edit-cut-menu th, #edit-cut-menu td {
+    padding: 0 5px;
+}
+
+#edit-cut-menu .edit h4 {
+    margin-top: 10px;
+}
+
+#edit-cut-menu select {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* add-cut-menu */
+#add-cut-menu {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#add-cut-menu select {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* show-users */
+#show-users {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#show-users table, #show-users th, #show-users td {
+    border-collapse: collapse;
+    border: solid 1px black;
+    font-size: 20px;
+}
+
+#show-users table {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#show-users th, #show-users td {
+    padding: 0 5px;
+}
+
+#show-users tbody tr:nth-child(odd) {
+    background-color: rgb(200, 200, 200);
+}
+
+#show-users tbody tr:nth-child(even) {
+    background-color: rgb(255, 255, 255);
+}
+
+#show-users button {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+/* show-user-detail */
+#show-user-detail {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#show-user-detail .confirm-title {
+    width: 115px;
+    text-align: center;
+}
+
+#show-user-detail .confirm-body {
+    width: calc(100% - 125px);
+}
+
+#show-user-detail h4 {
+    text-align: center;
+}
+
+#show-user-detail .btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+    /* header */
+    .header-center, .header-right {
+        display: none;
+    }
+
+    .hambarger {
+        display: block;
+        width: 40px;
+        height: 30px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .hambarger .line {
+        height: 4px;
+        width: 100%;
+        background-color: black;
+    }
+
+    .hambarger .line {
+        transition: all .5s;
+    }
+
+    .hambarger .line:nth-child(2) {
+        position: absolute;
+        top: 50%;
+        opacity: 1;
+    }
+
+    .hambarger .line:nth-child(3) {
+        position: absolute;
+        bottom: -4px;
+    }
+
+    #hambarger:checked + .hambarger .line:first-child {
+        position: absolute;
+        transform: rotate(45deg);
+        top: 50%;
+    }
+
+    #hambarger:checked + .hambarger .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    #hambarger:checked + .hambarger .line:last-child {
+        position: absolute;
+        transform: rotate(-45deg);
+        top: 50%;
+    }
+
+    /* top */
+    .top .top-message p {
+        font-size: 30px;
+    }
+
+    /* about */
+    #about .content-container {
+        position: relative;
+        flex-direction: column-reverse;
+    }
+
+    #about img {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .about-message {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+    }
+
+    td, th {
+        vertical-align: top;
+    }
+
+    /* menu */
+    .menu-content {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu-list {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    /* header */
+    .small-menu-left {
+        width: 0;
+    }
+
+    .small-menu-right {
+        width: 100%;
+        padding-left: 0;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    /* top */
+    .top .top-message p {
+        font-size: 20px;
+    }
+
+    /* footer */
+    footer .content-container {
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+
+    .footer-menu {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer img {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .footer-shop-info {
+        margin-right: 0;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .footer-shop-info p {
+        display: inline-block;
+        width: auto;
+    }
+
+    /* index */
+    /* access */
+    #access p {
+        text-align: left;
+    }
+
+    /* manager */
+    /* reservation */
+    #reservation th, #reservation td {
+        font-size: 14px;
+    }
+
+    #reservation button {
+        font-size: 13px;
+    }
+
+    /* show-all-reservations */
+    #show-all-reservations th, #show-all-reservations td {
+        font-size: 14px;
+        padding: 0 2px;
+    }
+
+    #show-all-reservations button {
+        font-size: 13px;
+    }
+
+    /* show-users */
+    #show-users th, #show-users td {
+        font-size: 14px;
+        padding: 0 2px;
+    }
+
+    #show-users button {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .wrapper {
+        padding: 0 10px;
+    }
+
+    /* go-to-page-top */
+    .go-to-page-top {
+        right: 10px;
+    }
+
+    /* index */
+    /* about */
+    #about .rice-mark br {
+        display: none;
+    }
+
+    /* top */
+    .top-message {
+        left: 10px;
+        margin-right: 10px;
+    }
+
+    /* manager */
+    /* #manager-menu */
+    #manager-menu .manager-menu-content {
+        width: 100%;
+        margin-top: 10px;
+    }
+    #manager-menu .manager-menu-content:first-child {
+        margin-top: 0;
+    }
+
+    /* customer */
+    /* check-reservation */
+    #check-reservation .done-reservation p {
+        text-align: left;
+    }
+
+    /* mypage */
+    #check-reservation .content-container {
+        font-size: 16px;
+    }
+
+    /* show-cut-menu */
+    #show-cut-menu table, #show-cut-menu th, #show-cut-menu td {
+        font-size: 16px;
+    }
+
+    #show-cut-menu button {
+        font-size: 15px;
+    }
+
+    /* edit-cut-menu */
+    #edit-cut-menu table, #edit-cut-menu th, #edit-cut-menu td {
+        font-size: 16px;
+    }
+
+    #edit-cut-menu th, #edit-cut-menu td {
+        padding: 0 3px;
+    }
+
+    /* show-user-detail */
+    #show-user-detail .user-info-title {
+        width: 90px;
+    }
+
+    #show-user-detail .user-info-body {
+        width: calc(100% - 100px);
+    }
+
+    #show-user-detail .user-info {
+        font-size: 16px;
+    }
+}
