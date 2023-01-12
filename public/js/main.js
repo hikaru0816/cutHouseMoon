@@ -1,5 +1,15 @@
 'use strict';
 
+let observer = new MutationObserver(function(){
+    alert('変化しました');
+});
+const body = document.getElementById('#body');
+const config = {
+    childList: true,
+}
+observer.observe(body, config);
+
+
 // headerのbottom位置取得
 // let headerTop = $('.header').offset().top;
 // let headerHeight = $('.header').outerHeight();
