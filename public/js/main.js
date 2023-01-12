@@ -1,5 +1,13 @@
 'use strict';
 
+// headerのbottom位置取得
+let headerTop = $('.header').offset().top;
+let headerHeight = $('.header').outerHeight();
+let headerBottom = headerTop + headerHeight;
+
+// .topの高さを指定
+$('.top').css('height', `calc(100vh - ${headerBottom}px)`);
+
 // 画像スライド
 $('.img-container img:nth-child(n+2)').hide();
 setInterval(function() {
