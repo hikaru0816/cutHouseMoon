@@ -8,13 +8,17 @@
 // console.log(headerHeight);
 // console.log(headerBottom);
 // ページトップボタン
-$(window).on('scroll', function(){
-    let headerTop = $('.header').offset().top;
-    let headerHeight = $('.header').outerHeight();
-    let headerBottom = headerTop + headerHeight;
-    console.log(headerTop);
-    console.log(headerHeight);
-    console.log(headerBottom);
+// $(window).on('scroll', function(){
+//     let headerTop = $('.header').offset().top;
+//     let headerHeight = $('.header').outerHeight();
+//     let headerBottom = headerTop + headerHeight;
+//     console.log(headerTop);
+//     console.log(headerHeight);
+//     console.log(headerBottom);
+// });
+
+$('#vdbanner').on('onReady', function(){
+    alert('追加');
 });
 
 // .topの高さを指定
