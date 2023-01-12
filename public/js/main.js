@@ -1,12 +1,21 @@
 'use strict';
 
 // headerのbottom位置取得
-let headerTop = $('.header').offset().top;
-let headerHeight = $('.header').outerHeight();
-let headerBottom = headerTop + headerHeight;
-console.log(headerTop);
-console.log(headerHeight);
-console.log(headerBottom);
+// let headerTop = $('.header').offset().top;
+// let headerHeight = $('.header').outerHeight();
+// let headerBottom = headerTop + headerHeight;
+// console.log(headerTop);
+// console.log(headerHeight);
+// console.log(headerBottom);
+// ページトップボタン
+$(window).on('scroll', function(){
+    let headerTop = $('.header').offset().top;
+    let headerHeight = $('.header').outerHeight();
+    let headerBottom = headerTop + headerHeight;
+    console.log(headerTop);
+    console.log(headerHeight);
+    console.log(headerBottom);
+});
 
 // .topの高さを指定
 $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
