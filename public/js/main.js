@@ -17,9 +17,9 @@
 //     console.log(headerBottom);
 // });
 
-$('#vdbanner').onReady(function(e){
-    console.log('aa');
-});
+// $('#vdbanner').onReady(function(e){
+//     console.log('aa');
+// });
 
 // .topの高さを指定
 $('.top').css('height', `calc(100vh - ${headerBottom}px)`);

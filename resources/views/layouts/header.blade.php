@@ -14,6 +14,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
+    <div id="dvbanner">
+
+    </div>
     <div class="header">
         <div class="wrapper">
             <div class="header-container">
