@@ -17,7 +17,7 @@
 //     console.log(headerBottom);
 // });
 
-$('#vdbanner').on('onReady', function(){
+$('#vdbanner').onReady(function(e){
     console.log('aa');
 });
 
