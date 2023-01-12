@@ -32,7 +32,7 @@
 - 施術の予約
 
 ## 環境
-XAMPP/Laravel/MySQL/
+XAMPP/Laravel 5.6.40/PHP 7.4.30/MySQL/
 
 ## データベース
 お使いのphpMyAdminにて "DB.sql" のインポートをお願いします。
