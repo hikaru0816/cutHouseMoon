@@ -18,7 +18,7 @@
 // });
 
 $('#vdbanner').on('onReady', function(){
-    alert('追加');
+    console.log('aa');
 });
 
 // .topの高さを指定
