@@ -4,6 +4,9 @@
 let headerTop = $('.header').offset().top;
 let headerHeight = $('.header').outerHeight();
 let headerBottom = headerTop + headerHeight;
+console.log(headerTop);
+console.log(headerHeight);
+console.log(headerBottom);
 
 // .topの高さを指定
 $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
