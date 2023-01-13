@@ -53,26 +53,54 @@ $(window).on('scroll', function(){
             'transition': 'all .5s',
         });
     }
+});
+// スクロールによるイベント
+$(window).on('scroll', function(){
+    let scroll = $(window).scrollTop();
     // .small-navの高さ調整
     let headerTop = $('.header').offset().top;
     let headerHeight = $('.header').outerHeight();
     let headerBottom = headerTop + headerHeight;
     let headerBottomOffsetOnScreen = headerBottom - scroll;
-    if (headerBottomOffsetOnScreen >= 70) {
+    if (headerBottom - 70 >= scroll) {
         $('.small-nav').css({
             'height': `calc(100vh - ${headerBottomOffsetOnScreen}px)`,
             'top': `${headerBottomOffsetOnScreen}px`,
+        });
+        $('.fixed-header').css({
+            'display': `none`,
         });
     } else {
         $('.small-nav').css({
             'height': `calc(100vh - 70px)`,
             'top': `70px`,
         });
+        $('.fixed-header').css({
+            'display': `inline`,
+        });
+    }
+});
+
+// .headerと.fixed-headerの
+//チェックボックス（type='checkbox'）の値が変更されたとき
+$("input[type='checkbox']").on('change', function(){
+    //クリックされたチェックボックスのvalue値を変数に格納
+    let cbv = $(this).val();
+    //もしクリックされたチェックボックスがチェックされていたら・・・
+    if( $(this).prop('checked')){
+        //同じvalueを持つチェックボックスは全部チェックを入れる
+        $("input:checkbox[value='" + cbv + "']").prop('checked',true);
+    }else{
+        //逆にチェックが外れていたら全部チェックを外す。
+        $("input:checkbox[value='" + cbv + "']").prop('checked',false);
     }
 });
 
 // レスポンシブメニュー開閉
 $('#hambarger').on('change', function(){
+    $('.small-nav').toggleClass('active');
+});
+$('#fixed-hambarger').on('change', function(){
     $('.small-nav').toggleClass('active');
 });
 // aタグ押したらメニュー閉じる

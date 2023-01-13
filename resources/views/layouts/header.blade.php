@@ -13,7 +13,12 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
-<body>
+<body id="body">
+    <div id="vdbanner">
+        <a href="" target="_blank" rel="nofollow">
+            <img src="https://www.value-domain.com/assets/img/guide/setregist/bnr_xrea.png" alt="">
+        </a>
+    </div>
     <div class="header">
         <div class="wrapper">
             <div class="header-container">
@@ -65,8 +70,68 @@
                         </div>
                     @endif
                 </div>
-                <input type="checkbox" id="hambarger" style="display: none">
+                <input type="checkbox" id="hambarger" style="display: none" value="small-menu">
                 <label for="hambarger" class="hambarger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="header fixed-header">
+        <div class="wrapper">
+            <div class="header-container">
+                <div class="header-left">
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="カットハウスムーン">
+                    </a>
+                </div>
+                <div class="header-center">
+                    <div>
+                        <a href="{{ route('index') }}#about">店舗情報</a>
+                    </div>
+                    <div>
+                        <a href="{{ route('index') }}#menu">カットメニュー</a>
+                    </div>
+                    <div>
+                        <a href="{{ route('index') }}#access">アクセス</a>
+                    </div>
+                </div>
+                <div class="header-right">
+                    @if (empty(Auth::user()))
+                        <div class="unlogin">
+                            <div>
+                                <a href="{{ route('registFirst') }}" class="btn btn-info">会員登録</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('login') }}" class="btn btn-primary">ログイン</a>
+                            </div>
+                        </div>
+                    @else
+                        <div class="login">
+                            @if (Auth::user()->role === 0)
+                                <div>
+                                    <a href="{{ route('mypage') }}" class="btn btn-info">マイページ</a>
+                                </div>
+                            @else
+                                <div>
+                                    <a href="{{ route('manager') }}" class="btn btn-info">管理者ページ</a>
+                                </div>
+                            @endif
+                            <div>
+                                <a class="btn btn-primary logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    ログアウト
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <input type="checkbox" id="fixed-hambarger" style="display: none" value="small-menu">
+                <label for="fixed-hambarger" class="hambarger">
                     <div class="line"></div>
                     <div class="line"></div>
                     <div class="line"></div>
