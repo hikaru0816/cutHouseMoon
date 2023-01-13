@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
-<body id="body">
+<body>
     <div class="header">
         <div class="wrapper">
             <div class="header-container">

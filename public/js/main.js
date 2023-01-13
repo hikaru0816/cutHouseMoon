@@ -1,38 +1,18 @@
 'use strict';
 
 let observer = new MutationObserver(function(){
-    alert('変化しました');
+    // headerのbottom位置取得
+    let headerTop = $('.header').offset().top;
+    let headerHeight = $('.header').outerHeight();
+    let headerBottom = headerTop + headerHeight;
+    // .topの高さを指定
+    $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
 });
-const body = document.getElementById('#body');
+const body = document.querySelector('body');
 const config = {
     childList: true,
 }
 observer.observe(body, config);
-
-
-// headerのbottom位置取得
-// let headerTop = $('.header').offset().top;
-// let headerHeight = $('.header').outerHeight();
-// let headerBottom = headerTop + headerHeight;
-// console.log(headerTop);
-// console.log(headerHeight);
-// console.log(headerBottom);
-// ページトップボタン
-// $(window).on('scroll', function(){
-//     let headerTop = $('.header').offset().top;
-//     let headerHeight = $('.header').outerHeight();
-//     let headerBottom = headerTop + headerHeight;
-//     console.log(headerTop);
-//     console.log(headerHeight);
-//     console.log(headerBottom);
-// });
-
-// $('#vdbanner').onReady(function(e){
-//     console.log('aa');
-// });
-
-// .topの高さを指定
-$('.top').css('height', `calc(100vh - ${headerBottom}px)`);
 
 // 画像スライド
 $('.img-container img:nth-child(n+2)').hide();
