@@ -14,11 +14,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body id="body">
-    <div id="vdbanner">
-        <a href="" target="_blank" rel="nofollow">
-            <img src="https://www.value-domain.com/assets/img/guide/setregist/bnr_xrea.png" alt="">
-        </a>
-    </div>
     <div class="header">
         <div class="wrapper">
             <div class="header-container">
