@@ -210,8 +210,8 @@ h2 {
     display: flex;
     position: fixed;
     width: 100%;
-    height: calc(100vh - 70px);
-    top: 70px;
+    /* height: calc(100vh - 70px); */
+    /* top: 70px; */
     z-index: 20;
     transform: translateX(100%);
     transition: all .3s;

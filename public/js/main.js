@@ -1,14 +1,9 @@
 'use strict';
 
-// topの画像サイズ設定
+// topの高さ設定
 // XREAの広告が追加されたタイミングで再計算
 let observer = new MutationObserver(function(){
-    // headerのbottom位置取得
-    let headerTop = $('.header').offset().top;
-    let headerHeight = $('.header').outerHeight();
-    let headerBottom = headerTop + headerHeight;
-    // .topの高さを指定
-    $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
+    calcTopHeight();
 });
 const body = document.querySelector('body');
 const config = {
@@ -17,13 +12,21 @@ const config = {
 observer.observe(body, config);
 // 画面がリサイズされたら再計算
 $(window).on('resize', function(){
+    calcTopHeight();
+});
+// top高さ計算関数
+function calcTopHeight() {
     // headerのbottom位置取得
     let headerTop = $('.header').offset().top;
     let headerHeight = $('.header').outerHeight();
     let headerBottom = headerTop + headerHeight;
-    // .topの高さを指定
+    // .top, .small-navの高さを指定
     $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
-});
+    $('.small-nav').css({
+        'height': `calc(100vh - ${headerBottom}px)`,
+        'top': `${headerBottom}px`,
+    });
+}
 
 // 画像スライド
 $('.img-container img:nth-child(n+2)').hide();
@@ -33,9 +36,10 @@ setInterval(function() {
     $(".img-container img:first-child").appendTo(".img-container");
 }, 5000);
 
-// ページトップボタン
+// スクロールによるイベント
 $(window).on('scroll', function(){
     let scroll = $(window).scrollTop();
+    // ページトップへボタン
     let line = 450;
     if (scroll >= line) {
         $('.go-to-page-top').css({
@@ -47,6 +51,22 @@ $(window).on('scroll', function(){
             'bottom': '-50px',
             'opacity': '0',
             'transition': 'all .5s',
+        });
+    }
+    // .small-navの高さ調整
+    let headerTop = $('.header').offset().top;
+    let headerHeight = $('.header').outerHeight();
+    let headerBottom = headerTop + headerHeight;
+    let headerBottomOffsetOnScreen = headerBottom - scroll;
+    if (headerBottomOffsetOnScreen >= 70) {
+        $('.small-nav').css({
+            'height': `calc(100vh - ${headerBottomOffsetOnScreen}px)`,
+            'top': `${headerBottomOffsetOnScreen}px`,
+        });
+    } else {
+        $('.small-nav').css({
+            'height': `calc(100vh - 70px)`,
+            'top': `70px`,
         });
     }
 });
