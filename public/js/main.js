@@ -1,5 +1,7 @@
 'use strict';
 
+// topの画像サイズ設定
+// XREAの広告が追加されたタイミングで再計算
 let observer = new MutationObserver(function(){
     // headerのbottom位置取得
     let headerTop = $('.header').offset().top;
@@ -13,6 +15,15 @@ const config = {
     childList: true,
 }
 observer.observe(body, config);
+// 画面がリサイズされたら再計算
+$(window).on('resize', function(){
+    // headerのbottom位置取得
+    let headerTop = $('.header').offset().top;
+    let headerHeight = $('.header').outerHeight();
+    let headerBottom = headerTop + headerHeight;
+    // .topの高さを指定
+    $('.top').css('height', `calc(100vh - ${headerBottom}px)`);
+});
 
 // 画像スライド
 $('.img-container img:nth-child(n+2)').hide();
