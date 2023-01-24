@@ -7,13 +7,13 @@
 
 ## ログイン情報
 ### 管理者アカウント
-- メールアドレス：manager@cut.house
+- メールアドレス：manager@email.com
 - パスワード：manager
 ### お客様アカウント①
-- customer001@cut.house
+- customer001@email.com
 - パスワード：customer
 ### お客様アカウント②
-- customer002@cut.house
+- customer002@email.com
 - パスワード：customer
 
 ## 未ログインでできること
@@ -44,6 +44,3 @@ XAMPP/Laravel 5.6.40/PHP 7.4.30/MySQL/
 4. start_times
 5. users
 6. waiting_statues
-
-## 更新
-- 2023年1月11日：アップロード日
