@@ -32,7 +32,7 @@ Route::post('/cutHouseMoon/regist', 'Auth\RegisterController@regist')->name('reg
 // パスワード変更
 Route::get('/cutHouseMoon/resetPasswordFirst', 'Auth\ResetPasswordController@resetPasswordFirst')->name('resetPasswordFirst');
 Route::post('/cutHouseMoon/resetPasswordFirst', 'Auth\ResetPasswordController@checkEmail')->name('checkEmailInResetPassword');
-Route::get('/cutHouseMoon/resetPasswordSecond', 'Auth\resetPasswordController@resetPasswordSecond')->name('resetPasswordSecond');
+Route::get('/cutHouseMoon/resetPasswordSecond', 'Auth\ResetPasswordController@resetPasswordSecond')->name('resetPasswordSecond');
 Route::get('/cutHouseMoon/resetPassword', 'Auth\ResetPasswordController@resetPass')->name('resetPassword'); // ダイレクトアクセス禁止用
 Route::post('/cutHouseMoon/resetPassword', 'Auth\ResetPasswordController@resetPass');
 
