@@ -95,9 +95,9 @@ CREATE TABLE users (
 
 -- テーブル：usersにデータ挿入
 INSERT INTO users (name, kana, tel, email, role, password) VALUES
-    ('管理者', 'カンリシャ', '0956478861', 'manager@cut.house', 1, '$2y$10$PdjkdUU3Mix97soyiTG1QOsiPcOgiXCL/X70pD2C4ofuFqTgntT22'),
-    ('山田花子', 'ヤマダハナコ', '08012345678', 'customer001@cut.house', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6'),
-    ('田中誠', 'タナカマコト', '08012345678', 'customer002@cut.house', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('管理者', 'カンリシャ', '0956478861', 'manager@email.com', 1, '$2y$10$PdjkdUU3Mix97soyiTG1QOsiPcOgiXCL/X70pD2C4ofuFqTgntT22'),
+    ('テストユーザー1', 'テストユーザー1', '08012345678', 'customer001@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6'),
+    ('テストユーザー2', 'テストユーザー2', '08012345678', 'customer002@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
 
 -- テーブル：waiting_statusesを作成
 CREATE TABLE waiting_statuses (
