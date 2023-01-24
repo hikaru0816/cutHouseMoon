@@ -27,7 +27,7 @@ Route::post('/cutHouseMoon/registCheck', 'Auth\RegisterController@registCheck');
 Route::get('/cutHouseMoon/registThird', 'Auth\RegisterController@registThird')->name('registThird');
 
 Route::get('/cutHouseMoon/regist', 'Auth\RegisterController@regist')->name('regist'); // ダイレクトアクセス禁止用
-Route::post('/cutHouseMoon/regist', 'Auth\RegisterController@regist')->name('regist');
+Route::post('/cutHouseMoon/regist', 'Auth\RegisterController@regist');
 
 // パスワード変更
 Route::get('/cutHouseMoon/resetPasswordFirst', 'Auth\ResetPasswordController@resetPasswordFirst')->name('resetPasswordFirst');

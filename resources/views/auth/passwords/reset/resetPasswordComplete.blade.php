@@ -15,7 +15,7 @@
                     ログインをお願いいたします。
                 </p>
             </div>
-            <a href="login" class="btn btn-primary">ログイン</a>
+            <a href="{{ route('login') }}" class="btn btn-primary">ログイン</a>
         </div>
     </section>
 </div>
