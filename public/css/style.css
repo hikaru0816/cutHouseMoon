@@ -611,6 +611,7 @@ footer img {
 #customer-name {
     padding-top: 5px;
     padding-bottom: 5px;
+    background-color: #fff;
 }
 
 #customer-name p {
@@ -619,6 +620,7 @@ footer img {
 
 /* check-reservation */
 #check-reservation {
+    padding-top: 30px;
     padding-bottom: 30px;
 }
 
@@ -645,18 +647,75 @@ footer img {
     border: solid 1px black;
 }
 
-/* reservate */
-#reservate {
-    padding-bottom: 50px;
-}
-
-#reservate .wrapper {
-    text-align: center;
-}
-
-#reservate .wrapper a {
+#check-reservation a {
+    margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+}
+
+/* #check-history */
+#check-history {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
+}
+
+#check-history h2 {
+    margin-bottom: 10px;
+}
+
+#check-history .content-container {
+    text-align: center;
+    font-size: 20px;
+}
+
+#check-history table {
+    margin: 0 auto;
+    background-color: rgb(246, 246, 246);
+}
+
+#check-history th, #check-history td {
+    padding: 0 5px;
+}
+
+#check-history table, #check-history th, #check-history td {
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+
+/* #history */
+#history {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#history h2 {
+    margin-bottom: 10px;
+}
+
+#history .content-container {
+    text-align: center;
+    font-size: 20px;
+}
+
+#history table {
+    margin: 0 auto;
+    background-color: white;
+}
+
+#history th, #history td {
+    padding: 0 5px;
+}
+
+#history table, #history th, #history td {
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+
+/* #check-my-info */
+#check-my-info {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 /* booking */
