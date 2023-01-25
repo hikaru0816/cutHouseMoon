@@ -714,6 +714,15 @@ footer img {
     padding-bottom: 30px;
 }
 
+#check-my-info .confirm-title {
+    width: 115px;
+    text-align: center;
+}
+
+#check-my-info .confirm-body {
+    width: calc(100% - 125px);
+}
+
 /* booking */
 #booking {
     padding-bottom: 50px;
@@ -1391,6 +1400,10 @@ footer img {
     }
 
     #show-user-detail .user-info {
+        font-size: 16px;
+    }
+
+    .confirm-title, .confirm-body {
         font-size: 16px;
     }
 }

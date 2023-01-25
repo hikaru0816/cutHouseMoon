@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 require(__DIR__ . '/../../../public/functions.php');
 
 use Illuminate\Http\Request;
