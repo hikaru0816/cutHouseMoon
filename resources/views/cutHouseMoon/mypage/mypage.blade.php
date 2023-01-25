@@ -5,12 +5,6 @@
 
 @include('layouts.header')
 
-<section id="customer-name">
-    <div class="wrapper">
-        <p>{{ Auth::user()->name }} 様</p>
-    </div>
-</section>
-
 <section id="check-reservation">
     <div class="wrapper">
         <h2>予約</h2>

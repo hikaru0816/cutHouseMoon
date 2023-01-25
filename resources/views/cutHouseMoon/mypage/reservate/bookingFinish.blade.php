@@ -3,12 +3,6 @@
 ?>
 @include('layouts.header')
 
-<section id="customer-name">
-    <div class="wrapper">
-        <p>{{ Auth::user()->name }} 様</p>
-    </div>
-</section>
-
 <section id="booking">
     <div class="wrapper">
         <h2>予約完了</h2>
