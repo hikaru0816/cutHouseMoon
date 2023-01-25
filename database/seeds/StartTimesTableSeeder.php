@@ -32,7 +32,6 @@ class StartTimesTableSeeder extends Seeder
             '17:00:00',
             '17:30:00',
             '18:00:00',
-            '18:30:00',
         ];
         foreach ($times as $time) {
             DB::table('start_times')->insert([
