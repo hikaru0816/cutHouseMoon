@@ -30,7 +30,8 @@ class MypageController extends Controller {
     public function mypage() {
         $reservations = $this->reservationController->getCustomerReservations();
         $countOfReservations = count($reservations);
-        return view('cutHouseMoon.mypage.mypage', compact('reservations', 'countOfReservations'));
+        $histories = $this->reservationController->getCustomerHistory();
+        return view('cutHouseMoon.mypage.mypage', compact('reservations', 'countOfReservations', 'histories'));
     }
 
     public function bookingFirst(Request $request) {
@@ -123,5 +124,10 @@ class MypageController extends Controller {
             // 二重送信対策
             return redirect(route('mypage'));
         }
+    }
+
+    public function history() {
+        $histories = $this->reservationController->getCustomerHistory();
+        return view('cutHouseMoon.mypage.history.history', compact('histories'));
     }
 }

@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return redirect(route('index'));
 });
@@ -37,14 +38,14 @@ Route::get('/cutHouseMoon/resetPassword', 'Auth\ResetPasswordController@resetPas
 Route::post('/cutHouseMoon/resetPassword', 'Auth\ResetPasswordController@resetPass');
 
 // 管理者ページ
-ROUTE::get('/cutHouseMoon/manager', 'ManagerController@manager')->name('manager');
+Route::get('/cutHouseMoon/manager', 'ManagerController@manager')->name('manager');
 // 空き状況更新
 Route::get('/cutHouseMoon/manager/updateEmpty', 'ManagerController@updateEmpty')->name('updateEmpty'); // ダイレクトアクセス禁止用
 Route::post('/cutHouseMoon/manager/updateEmpty', 'ManagerController@updateEmpty');
 // 予約関連
-ROUTE::get('/cutHouseMoon/manager/finishReservation', 'ManagerController@finishReservation')->name('finishReservation');
-ROUTE::get('/cutHouseMoon/manager/editReservationFirst', 'ManagerController@editReservationFirst')->name('editReservationFirst');
-ROUTE::get('/cutHouseMoon/manager/editReservationSecond', 'ManagerController@editReservationSecond')->name('editReservationSecond');
+Route::get('/cutHouseMoon/manager/finishReservation', 'ManagerController@finishReservation')->name('finishReservation');
+Route::get('/cutHouseMoon/manager/editReservationFirst', 'ManagerController@editReservationFirst')->name('editReservationFirst');
+Route::get('/cutHouseMoon/manager/editReservationSecond', 'ManagerController@editReservationSecond')->name('editReservationSecond');
 Route::get('/cutHouseMoon/manager/updateReservation', 'ManagerController@updateReservation')->name('updateReservation'); // ダイレクトアクセス禁止用
 Route::post('/cutHouseMoon/manager/updateReservation', 'ManagerController@updateReservation');
 Route::get('/cutHouseMoon/manager/finishUpdatingReservation', 'ManagerController@finishUpdatingReservation')->name('finishUpdatingReservation');
@@ -74,19 +75,21 @@ Route::get('/cutHouseMoon/manager/showUserDetail', 'ManagerController@showUserDe
 
 
 // お客様マイページ
-ROUTE::get('/cutHouseMoon/mypage', 'MypageController@mypage')->name('mypage');
+Route::get('/cutHouseMoon/mypage', 'MypageController@mypage')->name('mypage');
 // 予約作成
-ROUTE::get('/cutHouseMoon/mypage/bookingFirst', 'MypageController@bookingFirst')->name('bookingFirst');
-ROUTE::get('/cutHouseMoon/mypage/bookingSecond', 'MypageController@bookingSecond')->name('bookingSecond');
-ROUTE::post('/cutHouseMoon/mypage/bookingSecond', 'MypageController@bookingSecond');
-ROUTE::get('/cutHouseMoon/mypage/bookingCheck', 'MypageController@bookingCheck')->name('bookingCheck');
-ROUTE::post('/cutHouseMoon/mypage/bookingCheck', 'MypageController@bookingCheck');
-ROUTE::get('/cutHouseMoon/mypage/bookingThird', 'MypageController@bookingThird')->name('bookingThird');
-ROUTE::get('/cutHouseMoon/mypage/bookingFinish', 'MypageController@doBooking')->name('booking');
-ROUTE::post('/cutHouseMoon/mypage/bookingFinish', 'MypageController@doBooking');
+Route::get('/cutHouseMoon/mypage/bookingFirst', 'MypageController@bookingFirst')->name('bookingFirst');
+Route::get('/cutHouseMoon/mypage/bookingSecond', 'MypageController@bookingSecond')->name('bookingSecond');
+Route::post('/cutHouseMoon/mypage/bookingSecond', 'MypageController@bookingSecond');
+Route::get('/cutHouseMoon/mypage/bookingCheck', 'MypageController@bookingCheck')->name('bookingCheck');
+Route::post('/cutHouseMoon/mypage/bookingCheck', 'MypageController@bookingCheck');
+Route::get('/cutHouseMoon/mypage/bookingThird', 'MypageController@bookingThird')->name('bookingThird');
+Route::get('/cutHouseMoon/mypage/bookingFinish', 'MypageController@doBooking')->name('booking');
+Route::post('/cutHouseMoon/mypage/bookingFinish', 'MypageController@doBooking');
+// カット履歴確認
+Route::get('/cutHouseMooon/mypage/history', 'MypageController@history')->name('mypage.history');
 
 // ログイン認証関連
 Auth::routes();
 
 // エラー表示ページ
-ROUTE::get('/cutHouseMoon/error', 'ErrorController@displayError')->name('error');
+Route::get('/cutHouseMoon/error', 'ErrorController@displayError')->name('error');

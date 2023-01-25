@@ -102,6 +102,32 @@ class ReservationController extends Controller {
         }
     }
 
+    // ログインユーザーのカット履歴を取得
+    public function getCustomerHistory() {
+        try {
+            DB::beginTransaction();
+            $sql = Reservation::query();
+            $sql->where('user_id', Auth::user()->user_id);
+            $sql->where('status', 1);
+            $sql->orderBy('date', 'ASC');
+            $reservations = $sql->get();
+            DB::commit();
+            // 取得データを日時が早い順に並び替え
+            $reservations = $this->sortDateTime($reservations);
+            $countOfHistory = count($reservations);
+            $histories = [];
+            for ($i = $countOfHistory - 1; $i >= 0; $i--) {
+                $histories[] = $reservations[$i];
+            }
+            return $histories;
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
     // ログインしているお客様の予約を取得
     public function getCustomerReservations() {
         try {
@@ -195,6 +221,8 @@ class ReservationController extends Controller {
         }
     }
 
+
+    // コントローラー内の関数
     // 取得データを時間が早い順に並び替え
     function sortTime($reservations) {
         $times = [];
