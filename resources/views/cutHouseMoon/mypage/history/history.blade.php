@@ -27,6 +27,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="back-btn-container">
+                <a href="{{ route('mypage') }}" class="btn btn-link back-btn">マイページへ</a>
+            </div>
         </div>
     </div>
 </section>
