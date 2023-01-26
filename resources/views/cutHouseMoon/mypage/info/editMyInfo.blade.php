@@ -1,19 +1,34 @@
 <?php
-    $pageTitle = '会員登録 - カットハウスムーン';
+$pageTitle = 'ご登録情報修正 - カットハウスムーン';
 ?>
-
 
 @include('layouts.header')
 
 <div class="wrapper">
     <section id="register">
-        <h2>会員登録</h2>
+        <h2>ご登録情報修正</h2>
         <div class="content-container">
-            <form action="{{ route('registCheck') }}" method="POST" novalidate>
+            <form action="#" method="POST" novalidate>
                 @csrf
                 <div class="form-content">
+                    <label for="kana" class="form-label">フリガナ</label>
+                    @if($errors->has('kana'))
+                        @foreach($errors->get('kana') as $message)
+                        <p class="validation-error-message">
+                            {{ $message }}
+                        </p>
+                        @endforeach
+                    @endif
+                    <input type="text" value="{{ session('kana') ?? old('kana') ?? Auth::user()->kana }}" class="form-control">
+                    @if (!empty(session('kana')))
+                        <input id="kana" type="text" name="kana" value="{{ session('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
+                    @else
+                        <input id="kana" type="text" name="kana" value="{{ old('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
+                    @endif
+                </div>
+                <div class="form-content">
                     <label for="email" class="form-label">メールアドレス</label>
-                    <input value="{{ session('email') }}" class="form-control" disabled>
+                    <input value="{{ session('email') }}" class="form-control">
                     <input type="hidden" id="email" name="email" value="{{ session('email') }}">
                 </div>
                 <div class="form-content">
@@ -25,29 +40,13 @@
                         </p>
                         @endforeach
                     @endif
-                    <input id="name" type="text" name="name" value="{{ session('name') ?? old('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
-                    {{-- @if (!empty(session('name')))
+                    @if (!empty(session('name')))
                         <input id="name" type="text" name="name" value="{{ session('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
                     @else
                         <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
-                    @endif --}}
-                </div>
-                <div class="form-content">
-                    <label for="kana" class="form-label">フリガナ</label>
-                    @if($errors->has('kana'))
-                        @foreach($errors->get('kana') as $message)
-                        <p class="validation-error-message">
-                            {{ $message }}
-                        </p>
-                        @endforeach
                     @endif
-                    <input id="kana" type="text" name="kana" value="{{ session('kana') ?? old('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    {{-- @if (!empty(session('kana')))
-                        <input id="kana" type="text" name="kana" value="{{ session('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    @else
-                        <input id="kana" type="text" name="kana" value="{{ old('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    @endif --}}
                 </div>
+
                 <div class="form-content">
                     <label for="tel" class="form-label">電話番号</label>
                     @if($errors->has('tel'))
@@ -57,12 +56,11 @@
                         </p>
                         @endforeach
                     @endif
-                    <input id="tel" type="text" name="tel" value="{{ session('tel') ?? old('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
-                    {{-- @if (!empty(session('tel')))
+                    @if (!empty(session('tel')))
                         <input id="tel" type="tel" name="tel" value="{{ session('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
                     @else
                         <input id="tel" type="tel" name="tel" value="{{ old('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
-                    @endif --}}
+                    @endif
                 </div>
 
                 <div class="form-content">

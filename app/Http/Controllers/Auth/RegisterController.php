@@ -128,6 +128,8 @@ class RegisterController extends Controller
             'kana' => 'required|string|max:255',
             'tel' => 'required|string|max:11',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'tel.max' => '電話番号は11桁以下で入力していください'
         ]);
         return redirect(route('registThird'));
     }
