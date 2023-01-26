@@ -58,13 +58,7 @@
                 <div class="form-content">
                     <input type="hidden" name="id" value="{{ session('user_id') }}" id="user-id">
                     <label for="date" class="form-label">日付</label>
-                    @if (!empty($_GET['date']))
-                        <input id="date" type="date" name="date" value="{{ $_GET['date'] }}" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @elseif (!empty(session('date')))
-                        <input id="date" type="date" name="date" value="{{ session('date') }}" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @else
-                        <input id="date" type="date" name="date" value="{{ old('date') }}" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @endif
+                    <input type="date" id="date" name="date" value="{{ $_GET['date'] ?? session('date') ?? old('date') }}" required class="form-control" min="{{ date('Y-m-d', strtotime('1 days')) }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
                     <p class="date-info rice-mark">
                         ※翌日から2週間後までの予約が可能です。<br>
                         毎月、第一日曜日・毎週月曜日はお休みのため予約できません。<br>
@@ -74,13 +68,7 @@
             </form>
             <form action="{{ route('addReservationValidate') }}" method="POST">
                 @csrf
-                @if (!empty($_GET['date']))
-                    <input type="hidden" name="date" value="{{ $_GET['date'] }}">
-                @elseif (!empty(session('date')))
-                    <input type="hidden" name="date" value="{{ session('date') }}">
-                @else
-                    <input type="hidden" name="date" value="{{ old('date') }}">
-                @endif
+                <input type="hidden" name="date" value="{{ $_GET['date'] ?? session('date') ?? old('date') }}">
                 <div class="form-content">
                     <label for="start_time" class="form-label">開始時間</label>
                     @if($errors->has('start_time'))
@@ -165,7 +153,8 @@
                         次へ
                     </button>
                 </div>
-            </form>            <div class="back-btn-container">
+            </form>
+            <div class="back-btn-container">
                 <a href="{{ route('addReservationFirst') }}" class="btn btn-link back-btn">お客様一覧へ</a>
             </div>
         </div>
