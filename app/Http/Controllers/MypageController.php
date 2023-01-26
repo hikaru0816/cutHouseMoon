@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\EmailUniqueCheck;
 use Illuminate\Support\Facades\Auth;
 
 require(__DIR__ . '/../../../public/functions.php');
@@ -27,6 +28,7 @@ class MypageController extends Controller {
         $this->menuController = app()->make('App\Http\Controllers\MenuController');
         $this->startTimeController = app()->make('App\Http\Controllers\StartTimeController');
         $this->reservationController = app()->make('App\Http\Controllers\ReservationController');
+        $this->userController = app()->make('App\Http\Controllers\UserController');
     }
 
     public function mypage() {
@@ -36,8 +38,45 @@ class MypageController extends Controller {
         return view('cutHouseMoon.mypage.mypage', compact('reservations', 'countOfReservations', 'histories'));
     }
 
-    public function editMyInfo() {
-        return view('cutHouseMoon.mypage.info.editMyInfo');
+    public function editMyInfoFirst(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'editMyInfo') == false) {
+            $request->session()->put('name', Auth::user()->name);
+            $request->session()->put('kana', Auth::user()->kana);
+            $request->session()->put('tel', Auth::user()->tel);
+            $request->session()->put('email', Auth::user()->email);
+        }
+        return view('cutHouseMoon.mypage.info.editMyInfoFirst');
+    }
+
+    public function editMyInfoCheck(Request $request) {
+        session()->forget(['name', 'kana', 'tel', 'email']);
+        // バリデーション
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'kana' => 'required|string|max:255',
+            'tel' => 'required|string|max:11',
+            'email' => ['required', 'email:filter', new EmailUniqueCheck],
+        ], [
+            'tel.max' => '電話番号は11桁以下で入力していください'
+        ]);
+        // 入力内容の保存
+        $request->session()->put('name', $request->name);
+        $request->session()->put('kana', $request->kana);
+        $request->session()->put('tel', $request->tel);
+        $request->session()->put('email', $request->email);
+        return redirect(route('mypage.editMyInfoSecond'));
+    }
+
+    public function editMyInfoSecond() {
+        return view('cutHouseMoon.mypage.info.editMyInfoSecond');
+    }
+
+    public function editMyInfoComplete() {
+        $this->userController->editMyInfo();
+        session()->forget(['name', 'kana', 'tel', 'email']);
+        return view('cutHouseMoon.mypage.info.editMyInfoComplete');
     }
 
     public function bookingFirst(Request $request) {
