@@ -11,13 +11,7 @@
             <form action="{{ route('bookingSecond') }}" method="GET">
                 <div class="form-content">
                     <label for="date" class="form-label">日付</label>
-                    @if (!empty($_GET['date']))
-                        <input id="date" type="date" name="date" value="{{ $_GET['date'] }}" required class="form-control" min="{{ date('Y-m-d', strtotime('1 days')) }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @elseif (!empty(session('date')))
-                        <input id="date" type="date" name="date" value="{{ session('date') }}" required class="form-control" min="{{ date('Y-m-d', strtotime('1 days')) }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @else
-                        <input id="date" type="date" name="date" value="{{ old('date') }}" required class="form-control" min="{{ date('Y-m-d', strtotime('1 days')) }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                    @endif
+                    <input type="date" id="date" name="date" value="{{ $_GET['date'] ?? session('date') ?? old('date') }}" required class="form-control" min="{{ date('Y-m-d', strtotime('1 days')) }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
                     <p class="date-info rice-mark">
                         ※翌日から2週間後までの予約が可能です。<br>
                         当日の予約はお電話にてお願いいたします。<br>
@@ -28,13 +22,7 @@
             </form>
             <form action="{{ route('bookingCheck') }}" method="POST">
                 @csrf
-                @if (!empty($_GET['date']))
-                    <input type="hidden" name="date" value="{{ $_GET['date'] }}">
-                @elseif (!empty(session('date')))
-                    <input type="hidden" name="date" value="{{ session('date') }}">
-                @else
-                    <input type="hidden" name="date" value="{{ old('date') }}">
-                @endif
+                <input type="hidden" name="date" value="{{ $_GET['date'] ?? session('date') ?? old('date') }}">
                 <div class="form-content">
                     <label for="start_time" class="form-label">開始時間</label>
                     @if($errors->has('start_time'))
