@@ -20,11 +20,7 @@
                         </p>
                         @endforeach
                     @endif
-                    @if (!empty(old('email')))
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="例）example@cut.com" class="form-control">
-                    @else
-                        <input id="email" type="email" name="email" value="{{ session('email') }}" required autofocus placeholder="例）example@cut.com" class="form-control">
-                    @endif
+                    <input type="email" id="email" name="email" value="{{ old('email') ?? session('email') }}" required autofocus placeholder="例）example@cut.com" class="form-control">
                 </div>
                 <div class="form-content">
                     <button type="submit" class="btn btn-primary">
