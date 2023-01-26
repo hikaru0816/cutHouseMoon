@@ -26,11 +26,6 @@
                         @endforeach
                     @endif
                     <input id="name" type="text" name="name" value="{{ session('name') ?? old('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
-                    {{-- @if (!empty(session('name')))
-                        <input id="name" type="text" name="name" value="{{ session('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
-                    @else
-                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="例）山田太郎" class="form-control">
-                    @endif --}}
                 </div>
                 <div class="form-content">
                     <label for="kana" class="form-label">フリガナ</label>
@@ -42,11 +37,6 @@
                         @endforeach
                     @endif
                     <input id="kana" type="text" name="kana" value="{{ session('kana') ?? old('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    {{-- @if (!empty(session('kana')))
-                        <input id="kana" type="text" name="kana" value="{{ session('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    @else
-                        <input id="kana" type="text" name="kana" value="{{ old('kana') }}" required autofocus placeholder="例）ヤマダタロウ" class="form-control">
-                    @endif --}}
                 </div>
                 <div class="form-content">
                     <label for="tel" class="form-label">電話番号</label>
@@ -58,11 +48,6 @@
                         @endforeach
                     @endif
                     <input id="tel" type="text" name="tel" value="{{ session('tel') ?? old('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
-                    {{-- @if (!empty(session('tel')))
-                        <input id="tel" type="tel" name="tel" value="{{ session('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
-                    @else
-                        <input id="tel" type="tel" name="tel" value="{{ old('tel') }}" required autofocus placeholder="例）08012345678" class="form-control">
-                    @endif --}}
                 </div>
 
                 <div class="form-content">

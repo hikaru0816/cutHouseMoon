@@ -88,7 +88,12 @@ Route::post('/cutHouseMoon/mypage/bookingFinish', 'MypageController@doBooking');
 // カット履歴確認
 Route::get('/cutHouseMooon/mypage/history', 'MypageController@history')->name('mypage.history');
 // 登録内容編集
-Route::get('/cutHouseMoon/mypage/editMyInfo', 'MypageController@editMyInfo')->name('mypage.editMyInfo');
+Route::get('/cutHouseMoon/mypage/editMyInfoFirst', 'MypageController@editMyInfoFirst')->name('mypage.editMyInfoFirst');
+Route::get('/cutHouseMoon/mypage/editMyInfoCheck', 'MypageController@editMyInfoCheck')->name('mypage.editMyInfoCheck');
+Route::post('/cutHouseMoon/mypage/editMyInfoCheck', 'MypageController@editMyInfoCheck');
+Route::get('/cutHouseMoon/mypage/editMyInfoSecond', 'MypageController@editMyInfoSecond')->name('mypage.editMyInfoSecond');
+Route::get('/cutHouseMoon/mypage/editMyInfoComplete', 'MypageController@editMyInfoComplete')->name('mypage.editMyInfoComplete');
+
 
 // ログイン認証関連
 Auth::routes();

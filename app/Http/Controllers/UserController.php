@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
@@ -105,6 +106,44 @@ class UserController extends Controller {
             DB::beginTransaction();
             $user = User::find($id);
             $user->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    // メールアドレスのチェック
+    public function getRegistedEmail() {
+        try {
+            DB::beginTransaction();
+            $users = User::all();
+            $emails = [];
+            foreach ($users as $user) {
+                $emails[] = $user['email'];
+            }
+            DB::commit();
+            return $emails;
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    // 登録内容の修正
+    public function editMyInfo() {
+        try {
+            DB::beginTransaction();
+            $user = User::find(Auth::user()->user_id);
+            $user->name = session('name');
+            $user->kana = session('kana');
+            $user->email = session('email');
+            $user->tel = session('tel');
+            $user->save();
             DB::commit();
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
