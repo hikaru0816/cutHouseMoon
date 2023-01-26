@@ -723,6 +723,16 @@ footer img {
     width: calc(100% - 125px);
 }
 
+#check-my-info .btn-container {
+    text-align: center;
+}
+
+#check-my-info a {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /* booking */
 #booking {
     padding-bottom: 50px;

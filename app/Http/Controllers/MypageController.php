@@ -36,6 +36,10 @@ class MypageController extends Controller {
         return view('cutHouseMoon.mypage.mypage', compact('reservations', 'countOfReservations', 'histories'));
     }
 
+    public function editMyInfo() {
+        return view('cutHouseMoon.mypage.info.editMyInfo');
+    }
+
     public function bookingFirst(Request $request) {
         return view('cutHouseMoon.mypage.reservate.bookingFirst');
     }

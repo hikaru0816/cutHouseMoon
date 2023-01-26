@@ -145,6 +145,9 @@
             <p class="rice-mark">
                 ※パスワードは個人情報保護のため表示しておりません。
             </p>
+            <div class="btn-container">
+                <a href="{{ route('mypage.editMyInfo') }}" class="btn btn-primary">修正する</a>
+            </div>
         </div>
     </div>
 </section>
