@@ -94,9 +94,12 @@ Route::post('/cutHouseMoon/mypage/editMyInfoCheck', 'MypageController@editMyInfo
 Route::get('/cutHouseMoon/mypage/editMyInfoSecond', 'MypageController@editMyInfoSecond')->name('mypage.editMyInfoSecond');
 Route::get('/cutHouseMoon/mypage/editMyInfoComplete', 'MypageController@editMyInfoComplete')->name('mypage.editMyInfoComplete');
 
-
 // ログイン認証関連
 Auth::routes();
 
 // エラー表示ページ
 Route::get('/cutHouseMoon/error', 'ErrorController@displayError')->name('error');
+
+// テスト用
+Route::get('/cutHouseMoon/test', 'TestController@test')->name('test');
+Route::post('/cutHouseMoon/test', 'TestController@test');
