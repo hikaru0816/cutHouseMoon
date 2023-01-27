@@ -39,7 +39,7 @@ class MypageController extends Controller {
     }
 
     public function editMyInfoFirst(Request $request) {
-        // ダイレクトアクセス対策
+        // editMyInfoSecondから戻ってきたときはセッション保存しない
         $referer = $request->header('referer');
         if (strpos($referer, 'editMyInfo') == false) {
             $request->session()->put('name', Auth::user()->name);
@@ -51,6 +51,12 @@ class MypageController extends Controller {
     }
 
     public function editMyInfoCheck(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'editMyInfoFirst') == false) {
+            return redirect(route('mypage'));
+        }
+        // セッションのリセット
         session()->forget(['name', 'kana', 'tel', 'email']);
         // バリデーション
         $request->validate([
@@ -69,11 +75,21 @@ class MypageController extends Controller {
         return redirect(route('mypage.editMyInfoSecond'));
     }
 
-    public function editMyInfoSecond() {
+    public function editMyInfoSecond(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'editMyInfoFirst') == false) {
+            return redirect(route('mypage'));
+        }
         return view('cutHouseMoon.mypage.info.editMyInfoSecond');
     }
 
-    public function editMyInfoComplete() {
+    public function editMyInfoComplete(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'editMyInfoSecond') == false) {
+            return redirect(route('mypage'));
+        }
         $this->userController->editMyInfo();
         session()->forget(['name', 'kana', 'tel', 'email']);
         return view('cutHouseMoon.mypage.info.editMyInfoComplete');
