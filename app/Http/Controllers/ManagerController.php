@@ -212,7 +212,7 @@ class managerController extends Controller {
 
     // 会員一覧取得
     public function showUsers() {
-        $users = $this->userController->getCustomerUsers();
+        $users = $this->userController->getTenCustomer();
         return view('cutHouseMoon.manager.user.showUsers', compact('users'));
     }
 
@@ -247,7 +247,7 @@ class managerController extends Controller {
     // お客様選択
     public function addReservationFirst(Request $request) {
         session()->forget(['user_id', 'date', 'startTime', 'menu', 'user_kana', 'user_name', 'reservations']);
-        $users = $this->userController->getCustomerUsers();
+        $users = $this->userController->getTenCustomer();
         return view('cutHouseMoon.manager.reservation.addReservationFirst', compact('users'));
     }
 

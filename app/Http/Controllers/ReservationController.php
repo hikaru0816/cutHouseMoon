@@ -29,23 +29,19 @@ class ReservationController extends Controller {
         }
     }
 
-    // まだ終わっていない予約を全部取得
+    // まだ終わっていない予約を取得
     public function getYetReservations() {
         try {
             DB::beginTransaction();
-            $sql = Reservation::query();
-            $sql->where('status', '0');
-            $sql->orderBy('date', 'ASC');
-            $reservations = $sql->get();
+            $reservations = Reservation::where('status', '0')->orderBy('date', 'ASC')->orderBy('start_time_id', 'ASC')->paginate(10);
             DB::commit();
+            return $reservations;
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
             DB::rollBack();
             // エラーを表示
             return view('cutHouseMoon.error', compact('errorMessage'));
         }
-        // 取得データを日時が早い順に並び替え
-            return $this->sortDateTime($reservations);
     }
 
     // 予約を追加
@@ -106,20 +102,21 @@ class ReservationController extends Controller {
     public function getCustomerHistory() {
         try {
             DB::beginTransaction();
-            $sql = Reservation::query();
-            $sql->where('user_id', Auth::user()->user_id);
-            $sql->where('status', 1);
-            $sql->orderBy('date', 'ASC');
-            $reservations = $sql->get();
+            // $sql = Reservation::query();
+            // $sql->where('user_id', Auth::user()->user_id);
+            // $sql->where('status', 1);
+            // $sql->orderBy('date', 'ASC');
+            // $reservations = $sql->get();
+            $reservations = Reservation::where('user_id', Auth::user()->user_id)->where('status', 1)->orderBy('date', 'DESC')->orderBy('start_time_id', 'DESC')->paginate(5);
             DB::commit();
             // 取得データを日時が早い順に並び替え
-            $reservations = $this->sortDateTime($reservations);
-            $countOfHistory = count($reservations);
-            $histories = [];
-            for ($i = $countOfHistory - 1; $i >= 0; $i--) {
-                $histories[] = $reservations[$i];
-            }
-            return $histories;
+            // $reservations = $this->sortDateTime($reservations);
+            // $countOfHistory = count($reservations);
+            // $histories = [];
+            // for ($i = $countOfHistory - 1; $i >= 0; $i--) {
+            //     $histories[] = $reservations[$i];
+            // }
+            return $reservations;
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
             DB::rollBack();
@@ -180,6 +177,7 @@ class ReservationController extends Controller {
             DB::commit();
             // 取得データを時間が早い順に並び替え
             return $this->sortTime($reservations);
+            return $reservations;
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
             DB::rollBack();
@@ -187,6 +185,7 @@ class ReservationController extends Controller {
             return view('cutHouseMoon.error', compact('errorMessage'));
         }
     }
+
 
     // 指定されたidの予約を取得
     public function getSelectedReservation($id) {

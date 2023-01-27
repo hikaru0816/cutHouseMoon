@@ -53,7 +53,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>No.</th>
                             <th>時間</th>
                             <th>氏名</th>
                             <th>メニュー</th>

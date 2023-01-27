@@ -152,4 +152,19 @@ class UserController extends Controller {
             return view('cutHouseMoon.error', compact('errorMessage'));
         }
     }
+
+    // 会員を5名ずつ取得
+    public function getTenCustomer() {
+        try {
+            DB::beginTransaction();
+            $users = User::where('role', 0)->paginate(10);
+            DB::commit();
+            return $users;
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
 }

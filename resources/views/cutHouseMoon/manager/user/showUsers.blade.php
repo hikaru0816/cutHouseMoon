@@ -12,7 +12,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>名前</th>
                         <th>ヨミ</th>
                         <th></th>
@@ -36,6 +36,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="links">
+                {!! $users->links() !!}
+            </div>
             <div class="back-btn-container">
                 <a href="{{ route('manager') }}" class="btn btn-link back-btn">管理者ページへ</a>
             </div>

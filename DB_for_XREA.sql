@@ -95,6 +95,16 @@ INSERT INTO users (name, kana, tel, email, role, password) VALUES
     ('管理者', 'カンリシャ', '0956478861', 'manager@email.com', 1, '$2y$10$PdjkdUU3Mix97soyiTG1QOsiPcOgiXCL/X70pD2C4ofuFqTgntT22'),
     ('テストユーザー1', 'テストユーザー1', '08012345678', 'customer001@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6'),
     ('テストユーザー2', 'テストユーザー2', '08012345678', 'customer002@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー3', 'テストユーザー3', '08012345678', 'customer003@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー4', 'テストユーザー4', '08014345678', 'customer004@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー5', 'テストユーザー5', '08015345678', 'customer005@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー6', 'テストユーザー6', '08016345678', 'customer006@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー7', 'テストユーザー7', '08017345678', 'customer007@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー8', 'テストユーザー8', '08018345678', 'customer008@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー9', 'テストユーザー9', '08019345678', 'customer009@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー10', 'テストユーザー10', '08011345678', 'customer010@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー11', 'テストユーザー11', '08012345678', 'customer011@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
+    ('テストユーザー12', 'テストユーザー12', '08012345678', 'customer012@email.com', 0, '$2y$10$drjeaLhzJN7Y/c4RGX2H0uB.Qz.SyA2O76ko4jlxfdaZ98ZOg2Bk6');
 
 -- テーブル：waiting_statusesを作成
 CREATE TABLE waiting_statuses (

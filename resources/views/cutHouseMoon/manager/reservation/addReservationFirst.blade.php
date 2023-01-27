@@ -44,6 +44,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="links">
+                {!! $users->links() !!}
+            </div>
             <div class="back-btn-container">
                 <a href="{{ route('manager') }}" class="btn btn-link back-btn">管理者ページへ</a>
             </div>
