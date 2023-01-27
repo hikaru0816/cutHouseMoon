@@ -15,11 +15,8 @@ class MypageController extends Controller {
         $this->middleware('auth');
         // コントローラー内で認証情報を使用
         $this->middleware(function ($request, $next) {
-            // ログイン情報
-            $this->user = \Auth::user();
-            $role = $this->user->role;
             // 管理者の場合、リダイレクト
-            if ($role === 1) {
+            if (Auth::user()->role === 1) {
                 return redirect(route('manager'));
             }
             return $next($request);

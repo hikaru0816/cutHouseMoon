@@ -13,11 +13,8 @@ class managerController extends Controller {
         $this->middleware('auth');
         // コントローラー内で認証情報を使用
         $this->middleware(function ($request, $next) {
-            // ログイン情報
-            $this->user = \Auth::user();
-            $role = $this->user->role;
             // お客様アカウントの場合、リダイレクト
-            if ($role === 0) {
+            if (Auth::user()->role === 0) {
                 return redirect(route('mypage'));
             }
             return $next($request);
