@@ -181,9 +181,9 @@ class UserController extends Controller {
             $query = User::query();
             // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
             foreach($wordArraySearched as $value) {
-                $query->where('search', 'like', '%'.$value.'%');
+                $query->where('search', 'like binary', '%'.$value.'%');
             }
-            $users = $query->paginate(2);
+            $users = $query->paginate(10);
             DB::commit();
             return $users;
         } catch (Exception $e) {
