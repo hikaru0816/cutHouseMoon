@@ -155,6 +155,28 @@ h2 {
     color: #000;
 }
 
+/* キーワード検索 */
+/* .search */
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.search input {
+    width: 200px;
+    margin-right: 5px;
+    padding: 0 5px;
+}
+
+.search button {
+    margin-right: 5px;
+    padding: 0 5px;
+}
+
+.search a {
+    padding: 0 5px;
+}
+
 /* header */
 .header {
     width: 100%;
@@ -232,8 +254,6 @@ h2 {
     display: flex;
     position: fixed;
     width: 100%;
-    /* height: calc(100vh - 70px); */
-    /* top: 70px; */
     z-index: 20;
     transform: translateX(100%);
     transition: all .3s;
@@ -270,7 +290,6 @@ h2 {
 /* top */
 .top {
     position: relative;
-    /* height: calc(100vh - 70px); */
 }
 
 .img-container {
@@ -1114,7 +1133,7 @@ footer img {
     background-color: rgb(255, 255, 255);
 }
 
-#show-users button {
+#show-users .table-btn {
     padding: 0;
     margin: 0;
     font-size: 19px;
@@ -1332,7 +1351,27 @@ footer img {
         padding: 0 2px;
     }
 
-    #show-users button {
+    #show-users .table-btn {
+        font-size: 13px;
+    }
+
+    /* キーワード検索 */
+    /* .search */
+    .search {
+        display: flex;
+        justify-content: center;
+    }
+
+    .search input {
+        width: 150px;
+        font-size: 13px;
+    }
+
+    .search button {
+        font-size: 13px;
+    }
+
+    .search a {
         font-size: 13px;
     }
 }

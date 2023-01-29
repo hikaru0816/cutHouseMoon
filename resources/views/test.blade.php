@@ -8,6 +8,18 @@
 
 <div class="container">
     <h1>テスト</h1>
+    <form action="{{ route('test') }}" method="get">
+        <input type="search" placeholder="ユーザー名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+        <div>
+            <button type="submit">検索</button>
+            <button>
+                <a href="{{ route('test') }}">
+                    クリア
+                </a>
+            </button>
+        </div>
+    </form>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -33,7 +45,7 @@
         </tbody>
     </table>
 
-    {!! $data->links() !!}
+    {!! $data->appends(request()->query())->links() !!}
 </div>
 
 </body>
