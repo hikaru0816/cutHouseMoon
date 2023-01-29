@@ -23,7 +23,7 @@ CREATE TABLE menus (
     id INT(11) AUTO_INCREMENT NOT NULL,
     name VARCHAR(100) NOT NULL UNIQUE,
     price INT(11) NOT NULL,
-    doing_time FLOAT(11) NOT NULL,
+    doing_time FLOAT NOT NULL,
     display INT(1) NOT NULL,
     PRIMARY KEY (id)
 );
