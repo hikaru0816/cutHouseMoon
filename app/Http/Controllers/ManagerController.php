@@ -213,12 +213,17 @@ class managerController extends Controller {
     // 会員一覧取得
     public function showUsers(Request $request) {
         $users = $this->userController->getTenCustomer();
-        $search = $request->search;
-        // 検索ワードがあった場合
-        if ($search) {
-            $users = $this->userController->getSearchedCustomer($search);
+        $referer = $request->header('referer');
+        $checkReferer = (strpos($referer, 'showUserDetail') == false);
+        if ($checkReferer) {
+            $request->session()->put('page', request()->query("page"));
+            $request->session()->put('search', request()->query("search"));
         }
-        return view('cutHouseMoon.manager.user.showUsers', compact('users', 'search'));
+        // 検索ワードがあった場合
+        if (session("search")) {
+            $users = $this->userController->getSearchedCustomer(session("search"));
+        }
+        return view('cutHouseMoon.manager.user.showUsers', compact('users'));
     }
 
     // 会員削除
@@ -253,12 +258,17 @@ class managerController extends Controller {
     public function addReservationFirst(Request $request) {
         session()->forget(['user_id', 'date', 'startTime', 'menu', 'user_kana', 'user_name', 'reservations']);
         $users = $this->userController->getTenCustomer();
-        $search = $request->search;
-        // 検索ワードがあった場合
-        if ($search) {
-            $users = $this->userController->getSearchedCustomer($search);
+        $referer = $request->header('referer');
+        $checkReferer = ((strpos($referer, 'showUserDetail') == false) || (strpos($referer, 'addReservation') == false));
+        if ($checkReferer) {
+            $request->session()->put('page', request()->query("page"));
+            $request->session()->put('search', request()->query("search"));
         }
-        return view('cutHouseMoon.manager.reservation.addReservationFirst', compact('users', 'search'));
+        // 検索ワードがあった場合
+        if (session('search')) {
+            $users = $this->userController->getSearchedCustomer(session('search'));
+        }
+        return view('cutHouseMoon.manager.reservation.addReservationFirst', compact('users'));
     }
 
     // お客様情報表示、

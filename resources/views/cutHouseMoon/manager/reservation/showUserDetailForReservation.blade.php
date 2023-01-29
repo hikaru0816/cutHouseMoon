@@ -52,7 +52,13 @@
                     </form>
                 </div>
                 <div class="back-btn-container">
-                    <a href="{{ route('addReservationFirst') }}" class="btn btn-link back-btn">お客様一覧へ</a>
+                    <form action="{{ route('addReservationFirst') }}" method="get">
+                        <input type="hidden" name="search" value="{{ session("search") }}">
+                        <input type="hidden" name="page" value="{{ session("page") }}">
+                        <button type="submit" class="btn btn-link back-btn">
+                            お客様一覧
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

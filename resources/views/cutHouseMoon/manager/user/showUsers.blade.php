@@ -10,7 +10,7 @@
         <div class="content-container">
             <h2>お客様一覧</h2>
             <form action="{{ route('showUsers') }}" method="get" class="search">
-                <input type="search" placeholder="名前またはヨミを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="form-control">
+                <input type="search" placeholder="名前またはヨミを入力" name="search" value="{{ session("search") }}" class="form-control">
                 <button type="submit" class="btn btn-secondary">検索</button>
                 <a href="{{ route('showUsers') }}"  class="btn btn-outline-dark">
                     クリア
@@ -30,7 +30,13 @@
                     @foreach ($users as $user)
                     <?php $i++ ?>
                     <tr>
-                        <td>{{ $i }}</td>
+                        @if (request()->query("page"))
+                            <td>
+                                {{ $i + 10 * (request()->query("page") - 1 ) }}
+                            </td>
+                        @else
+                            <td>{{ $i }}</td>
+                        @endif
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['kana'] }}</td>
                         <td>
