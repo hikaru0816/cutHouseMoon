@@ -8,30 +8,52 @@
         <h2>カットメニュー編集</h2>
         <div class="content-container">
             <h4>現在</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>メニュー名</th>
-                        <th>料金</th>
-                        <th>状態</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $menu['name'] }}</td>
-                        <td>{{ number_format($menu['price']) }}円</td>
+            <div class="confirm">
+                <div class="confirm-content">
+                    <div class="confirm-title">
+                        <p>メニュー名</p>
+                    </div>
+                    <div class="confirm-body">
+                        <p>{{ $menu['name'] }}</p>
+                    </div>
+                </div>
+                <div class="confirm-content">
+                    <div class="confirm-title">
+                        <p>料金</p>
+                    </div>
+                    <div class="confirm-body">
+                        <p>
+                            {{ number_format($menu['price']) }}円
+                        </p>
+                    </div>
+                </div>
+                <div class="confirm-content">
+                    <div class="confirm-title">
+                        <p>施術時間</p>
+                    </div>
+                    <div class="confirm-body">
+                        <p>
+                            {{ sprintf('%.1f',$menu['doing_time']) }}時間
+                        </p>
+                    </div>
+                </div>
+                <div class="confirm-content">
+                    <div class="confirm-title">
+                        <p>状態</p>
+                    </div>
+                    <div class="confirm-body">
                         @if ($menu['display'] === 0)
-                            <td>
+                            <p>
                                 表示中
-                            </td>
+                            </p>
                         @else
-                            <td>
+                            <p>
                                 非表示中
-                            </td>
+                            </p>
                         @endif
-                    </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="content-container edit">
             <h4>メニュー編集</h4>
