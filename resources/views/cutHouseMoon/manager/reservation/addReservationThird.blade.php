@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <h4 style="margin-top: 15px">{{ session('user_name') }}様の予約状況</h4>
+            <h4 style="margin-top: 15px">予約状況</h4>
             @if (count(session('reservations')) === 0)
                 <div class="no-reservation">
                     <p>予約していません</p>
