@@ -23,19 +23,20 @@ CREATE TABLE menus (
     id INT(11) AUTO_INCREMENT NOT NULL,
     name VARCHAR(100) NOT NULL UNIQUE,
     price INT(11) NOT NULL,
+    doing_time FLOAT(11) NOT NULL,
     display INT(1) NOT NULL,
     PRIMARY KEY (id)
 );
 
 -- テーブル：menusにデータ挿入
-INSERT INTO menus (name, price, display) VALUES
-    ('大人カット', 2800, 0),
-    ('高校生カット', 2500, 0),
-    ('中学生カット', 2000, 0),
-    ('小学生カット', 1800, 0),
-    ('パーマ', 6300, 0),
-    ('パンチ', 6300, 0),
-    ('ヘアダイ', 5300, 0);
+INSERT INTO menus (name, price, doing_time,  display) VALUES
+    ('大人カット', 2800, 1.0,  0),
+    ('高校生カット', 2500, 1.0, 0),
+    ('中学生カット', 2000, 1.0, 0),
+    ('小学生カット', 1800, 1.0, 0),
+    ('パーマ', 6300, 2.5, 0),
+    ('パンチ', 6300, 3.0, 0),
+    ('ヘアダイ', 5300, 2.0, 0);
 
 -- テーブル：reservationsを作成
 CREATE TABLE reservations (
