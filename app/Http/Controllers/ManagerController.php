@@ -211,9 +211,14 @@ class managerController extends Controller {
     }
 
     // 会員一覧取得
-    public function showUsers() {
+    public function showUsers(Request $request) {
         $users = $this->userController->getTenCustomer();
-        return view('cutHouseMoon.manager.user.showUsers', compact('users'));
+        $search = $request->search;
+        // 検索ワードがあった場合
+        if ($search) {
+            $users = $this->userController->getSearchedCustomer($search);
+        }
+        return view('cutHouseMoon.manager.user.showUsers', compact('users', 'search'));
     }
 
     // 会員削除
@@ -248,7 +253,12 @@ class managerController extends Controller {
     public function addReservationFirst(Request $request) {
         session()->forget(['user_id', 'date', 'startTime', 'menu', 'user_kana', 'user_name', 'reservations']);
         $users = $this->userController->getTenCustomer();
-        return view('cutHouseMoon.manager.reservation.addReservationFirst', compact('users'));
+        $search = $request->search;
+        // 検索ワードがあった場合
+        if ($search) {
+            $users = $this->userController->getSearchedCustomer($search);
+        }
+        return view('cutHouseMoon.manager.reservation.addReservationFirst', compact('users', 'search'));
     }
 
     // お客様情報表示、
