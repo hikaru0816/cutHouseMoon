@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class StartTimesTableSeeder extends Seeder
+class EndTimesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -167,11 +167,11 @@ class StartTimesTableSeeder extends Seeder
             ],
             [
                 "time" => "19:00:00",
-                "status" => 1,
+                "status" => 0,
             ],
             [
                 "time" => "19:30:00",
-                "status" => 1,
+                "status" => 0,
             ],
             [
                 "time" => "20:00:00",
@@ -208,7 +208,7 @@ class StartTimesTableSeeder extends Seeder
         ];
 
         foreach ($data as $time) {
-            DB::table('start_times')->insert([
+            DB::table('end_times')->insert([
                 'time' => $time["time"],
                 'status' => $time["status"],
             ]);
