@@ -62,7 +62,7 @@ Route::get('/cutHouseMoon/manager/addReservation/showUserDetailForReservation', 
 // カットメニュー関連
 Route::get('/cutHouseMoon/manager/showCutMenu', 'ManagerController@showCutMenu')->name('showCutMenu');
 Route::get('/cutHouseMoon/manager/editCutMenu', 'ManagerController@editCutMenuFirst')->name('editCutMenuFirst');
-Route::get('/cutHouseMoon/manager/editCutMenuComplete', 'ManagerController@editMenuComplete')->name('editCutMenuComplet'); // ダイレクトアクセス禁止用
+Route::get('/cutHouseMoon/manager/editCutMenuComplete', 'ManagerController@editMenuComplete')->name('editCutMenuComplete'); // ダイレクトアクセス禁止用
 Route::post('/cutHouseMoon/manager/editCutMenuComplete', 'ManagerController@editMenuComplete');
 Route::get('/cutHouseMoon/manager/addCutMenuFirst', 'ManagerController@addCutMenuFirst')->name('addCutMenuFirst');
 Route::get('/cutHouseMoon/manager/addCutMenuComplete', 'ManagerController@addCutMenuComplete')->name('addCutMenuComplete'); // ダイレクトアクセス禁止用
