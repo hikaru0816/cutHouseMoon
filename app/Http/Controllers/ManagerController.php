@@ -6,6 +6,7 @@ require(__DIR__ . '/../../../public/functions.php');
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\InputDoingTime;
 
 class managerController extends Controller {
     public function __construct() {
@@ -169,7 +170,9 @@ class managerController extends Controller {
     public function editMenuComplete(Request $request) {
         $request->validate([
             'name' => 'required|string|max:100',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'doing_time' => 'required|numeric|min:0',
+            'doing_time' => ['required', 'numeric', 'min:0', new InputDoingTime()],
             'display' => 'required',
         ], [
             'name.required' => 'メニュー名を入力してください'
@@ -187,7 +190,8 @@ class managerController extends Controller {
     public function addCutMenuComplete(Request $request) {
         $request->validate([
             'name' => 'required|string|max:10|unique:menus,name',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'doing_time' => ['required', 'numeric', 'min:0', new InputDoingTime()],
             'display' => 'numeric',
         ], [
             'name.required' => 'メニュー名を入力してください',
