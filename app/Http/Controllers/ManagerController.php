@@ -157,11 +157,12 @@ class managerController extends Controller {
     public function editCutMenuFirst(Request $request) {
         // ダイレクトアクセス対策
         $referer = $request->header('referer');
-        if (strpos($referer, 'showCutMenu') == false) {
+        if ((strpos($referer, 'showCutMenu') == true) || (strpos($referer, 'editCutMenu') == true)) {
+            $menu = $this->menuController->getSelectedMenu($request->id);
+            return view('cutHouseMoon.manager.cutMenu.editCutMenuFirst', compact('menu'));
+        } else {
             return redirect(route('showCutMenu'));
         }
-        $menu = $this->menuController->getSelectedMenu($request->id);
-        return view('cutHouseMoon.manager.cutMenu.editCutMenuFirst', compact('menu'));
     }
 
     // カットメニュー編集完了・バリデーション

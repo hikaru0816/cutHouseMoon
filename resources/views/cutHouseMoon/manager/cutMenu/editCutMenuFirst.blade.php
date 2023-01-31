@@ -57,7 +57,7 @@
         </div>
         <div class="content-container edit">
             <h4>メニュー編集</h4>
-            <form action="{{ route('editCutMenuComplet') }}" method="post" novalidate>
+            <form action="{{ route('editCutMenuComplete') }}" method="post" novalidate>
                 @csrf
                 <input type="hidden" name="id" value="{{ $menu['id'] }}">
                 <div class="form-content">
@@ -76,7 +76,7 @@
                     @endif
                 </div>
                 <div class="form-content">
-                    <label for="price" class="form-label">料金</label>
+                    <label for="price" class="form-label">料金（円）</label>
                     @if($errors->has('price'))
                         @foreach($errors->get('price') as $message)
                         <p class="validation-error-message">
