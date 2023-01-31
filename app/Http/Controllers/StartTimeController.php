@@ -12,11 +12,13 @@ class StartTimeController extends Controller {
         $this->errorController = app()->make('App\Http\Controllers\ErrorController');
     }
 
-    // 登録されている施術開始時間を全部取得
+    // 施術開始時間取得
     public function getStartTimes() {
         try {
             DB::beginTransaction();
-            $startTimes = StartTime::all();
+            $sql = StartTime::query();
+            $sql->where('status', 0);
+            $startTimes = $sql->get();
             DB::commit();
             return $startTimes;
         } catch (Exception $e) {

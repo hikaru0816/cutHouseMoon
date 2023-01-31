@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStartTimesTable extends Migration
+class CreateEndTimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStartTimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('start_times', function (Blueprint $table) {
+        Schema::create('end_times', function (Blueprint $table) {
             $table->increments('id');
             $table->time('time');
             $table->integer('status');
@@ -27,6 +27,6 @@ class CreateStartTimesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('start_times');
+        Schema::dropIfExists('end_times');
     }
 }
