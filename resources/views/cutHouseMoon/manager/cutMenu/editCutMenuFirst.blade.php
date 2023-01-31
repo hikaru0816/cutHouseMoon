@@ -69,11 +69,7 @@
                         </p>
                         @endforeach
                     @endif
-                    @if (empty(old('name')))
-                        <input id="name" type="text" name="name" value="{{ $menu['name'] }}" required autofocus placeholder="例）〇〇カット" class="form-control">
-                    @else
-                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="例）〇〇カット" class="form-control">
-                    @endif
+                    <input type="text" name="name" id="name" value="{{ old('name') ?? $menu['name'] }}" required autofocus placeholder="例）〇〇カット" class="form-control">
                 </div>
                 <div class="form-content">
                     <label for="price" class="form-label">料金（円）</label>
@@ -84,11 +80,18 @@
                         </p>
                         @endforeach
                     @endif
-                    @if (empty(old('price')))
-                        <input id="price" type="number" name="price" value="{{ $menu['price'] }}" required autofocus placeholder="例）5000（数字のみ入力）" class="form-control">
-                    @else
-                        <input id="price" type="number" name="price" value="{{ old('price') }}" required autofocus placeholder="例）5000（数字のみ入力）" class="form-control">
+                    <input type="number" name="price" id="price" value="{{ old('price') ?? $menu['price'] }}" required autofocus placeholder="例）5000（数字のみ入力）" class="form-control" min="0" step="100">
+                </div>
+                <div class="form-content">
+                    <label for="doing_time" class="form-label">施術時間（時間）</label>
+                    @if($errors->has('doing_time'))
+                        @foreach($errors->get('doing_time') as $message)
+                        <p class="validation-error-message">
+                            {{ $message }}
+                        </p>
+                        @endforeach
                     @endif
+                    <input type="number" name="doing_time" id="doing_time" value="{{ old('doing_time') ?? $menu['doing_time'] }}" required autofocus placeholder="例）2.5（0.5刻みで数字のみ入力）" class="form-control" min="0" step="0.5">
                 </div>
                 <div class="form-content">
                     <label for="display" class="form-label">状態</label>

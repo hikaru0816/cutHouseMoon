@@ -83,7 +83,7 @@ return [
     'mimes'                => 'The :attribute must be a file of type: :values.',
     'mimetypes'            => 'The :attribute must be a file of type: :values.',
     'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => ':attributeは正の数値を入力してください',
         'file'    => 'The :attribute must be at least :min kilobytes.',
         'string'  => ':attributeは:min文字以上で入力してください',
         'array'   => 'The :attribute must have at least :min items.',
@@ -149,5 +149,6 @@ return [
         'password' => 'パスワード',
         'password-confirm' => 'パスワード（確認用）',
         'price' => '料金',
+        'doing_time' => '施術時間',
     ],
 ];

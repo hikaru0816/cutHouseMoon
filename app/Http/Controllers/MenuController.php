@@ -67,6 +67,7 @@ class MenuController extends Controller {
             $menu = MEnu::find($request->id);
             $menu->name = $request->name;
             $menu->price = $request->price;
+            $menu->doing_time = $request->doing_time;
             $menu->display = $request->display;
             $menu->save();
             DB::commit();
@@ -85,6 +86,7 @@ class MenuController extends Controller {
             $menu = new Menu();
             $menu->name = $request->name;
             $menu->price = $request->price;
+            $menu->doing_time = $request->doing_time;
             $menu->display = $request->display;
             $menu->save();
             DB::commit();
