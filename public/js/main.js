@@ -147,17 +147,15 @@ $("#date").on("change", function(){
         let path = location.pathname;
         // bookingFirstへ戻る
         if (path.includes('booking')) {
-            window.location.href = 'bookingFirst';
+            window.location.href = 'bookingSecond';
         }
         // editReservationFirstへ戻る
         if (path.includes('editReservation')) {
-            let id = $('#reservation-id').val();
-            window.location.href = `editReservationFirst?id=${id}`;
+            window.location.href = `editReservationSecond`;
         }
-        // addReservationSecondへ戻る
+        // addReservationThirdへ戻る
         if (path.includes('addReservation')) {
-            let id = $('#user-id').val();
-            window.location.href = `addReservationSecond?id=${id}`;
+            window.location.href = `addReservationThird`;
         }
     }
 });

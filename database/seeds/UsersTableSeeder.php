@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
                 'tel' => '00000000000',
                 'email' => 'nagatomo@email.com',
                 'role' => 0,
-                'password' => '$2y$10$PdjkdUU3Mix97soyiTG1QOsiPcOgiXCL/X70pD2C4ofuFqTgntT22',
+                'password' => '$2y$10$RZ3OrLLakQo3jZYONb7mZuK.AFdOK878McdG01DmZKssEGYCNsNuS',
             ],
             [
                 'name' => '吉田麻也',

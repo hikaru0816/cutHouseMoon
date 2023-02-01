@@ -92,100 +92,167 @@ class MypageController extends Controller {
         return view('cutHouseMoon.mypage.info.editMyInfoComplete');
     }
 
+
+    public function history() {
+        $histories = $this->reservationController->getCustomerHistory();
+        return view('cutHouseMoon.mypage.history.history', compact('histories'));
+    }
+
+    // 新機能用
     public function bookingFirst(Request $request) {
-        return view('cutHouseMoon.mypage.reservate.bookingFirst');
+        // セッション管理
+        $referer = $request->header('referer');
+        if (strpos($referer, 'bookingSecond') == false) {
+            session()->forget(['menu']);
+        }
+
+        $menus = $this->menuController->getDisplayedCutMenu();
+        return view('cutHouseMoon.mypage.reservate.bookingFirst', compact('menus'));
+    }
+
+    public function validateMenu(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'bookingFirst') == false) {
+            return redirect(route('mypage'));
+        }
+        // 入浴内容の保存
+        $request->session()->put('menu', $request->menu);
+        // バリデーション
+        $request->validate([
+            'menu' => 'required',
+        ], [
+            'menu.required' => 'カットメニューを選択してください',
+        ]);
+        $menu = $this->menuController->getSelectedMenu(session('menu'));
+        $doingTimeBlock = ($menu['doing_time'] * 10) / 5 - 1;
+        $request->session()->put('doingTime', $doingTimeBlock);
+        return redirect(route('bookingSecond'));
     }
 
     public function bookingSecond(Request $request) {
         // ダイレクトアクセス対策
         $referer = $request->header('referer');
         if (strpos($referer, 'booking') == false) {
-            return redirect(route('bookingFirst'));
+            return redirect(route('mypage'));
         }
-        // セッション削除
-        if (!strpos($referer, 'bookingFirst') == false) {
-            session()->forget(['date', 'startTime', 'menu']);
-        }
-        // 〇日取得
-        $day = substr($request->date, -2);
-        // 〇曜日を取得
-        $dayOfWeek = getDayOfWeek($request->date);
-        // 月曜日チェック
-        $checkMonday = ($dayOfWeek == '月');
-        // 第一日曜日チェック
-        $checkSunday = (($dayOfWeek == '日') && ($day <= 7));
-        // 休みの日を選択していたら、bookingFristへ
-        if ($checkMonday || $checkSunday) {
-            return redirect(route('bookingFirst'));
-        }
-        // 同じ日付の予約を取得
-        if (!empty($request->date)) {
-            $already = $this->reservationController->getSelectedDateReservations($request->date);
-        } else {
-            $already = $this->reservationController->getSelectedDateReservations(session('date'));
-        }
-        // 既に予約されている予約時間IDを取得
-        $unableTime = [];
-        foreach ($already as $array) {
-            $unableTime[] = $array['start_time_id'];
-        }
-        $startTimes = $this->startTimeController->getStartTimes();
-        $menus = $this->menuController->getDisplayedCutMenu();
-        return view('cutHouseMoon.mypage.reservate.bookingSecond', compact('menus', 'startTimes' , 'unableTime'));
-    }
-
-    // バリデーション
-    public function bookingCheck(Request $request) {
-        // ダイレクトアクセス対策
-        $referer = $request->header('referer');
-        if (strpos($referer, 'booking') == false) {
-            return redirect(route('bookingFirst'));
-        }
-        // 入浴内容の保存
-        $request->session()->put('date', $request->date);
-        $request->session()->put('startTime', $request->start_time);
-        $request->session()->put('menu', $request->menu);
-        // バリデーション
-        $request->validate([
-            'start_time' => 'required',
-            'menu' => 'required',
-        ], [
-            'start_time.required' => '開始時間を選択してください',
-            'menu.required' => 'カットメニューを選択してください',
-        ]);
-        return redirect(route('bookingThird'));
+        $menu = $this->menuController->getSelectedMenu(session('menu'));
+        return view('cutHouseMoon.mypage.reservate.bookingSecond', compact('menu'));
     }
 
     public function bookingThird(Request $request) {
         // ダイレクトアクセス対策
         $referer = $request->header('referer');
         if (strpos($referer, 'booking') == false) {
-            return redirect(route('bookingFirst'));
+            return redirect(route('mypage'));
+        }
+        if ((strpos($referer, 'bookingSecond') == true) || (strpos($referer, 'bookingThird') == true)) {
+            session()->forget(['startTime']);
+            $request->session()->put('date', $request->date);
+        }
+        $menu = $this->menuController->getSelectedMenu(session('menu'));
+        // 〇日取得
+        $day = substr(session('date'), -2);
+        // 〇曜日を取得
+        $dayOfWeek = getDayOfWeek(session('date'));
+        // 月曜日チェック
+        $checkMonday = ($dayOfWeek == '月');
+        // 第一日曜日チェック
+        $checkSunday = (($dayOfWeek == '日') && ($day <= 7));
+        // 休みの日を選択していたら、リダイレクト
+        if ($checkMonday || $checkSunday) {
+            return redirect(route('bookingSecond'));
+        }
+        // 同じ日付の予約を取得
+        $already = $this->reservationController->getSelectedDateReservations(session('date'));
+        // 既に予約されている予約時間IDを取得
+        $unableTime = [];
+        foreach ($already as $array) {
+            $unableTime[] = $array['start_time_id'];
         }
         $startTimes = $this->startTimeController->getStartTimes();
-        $menus = $this->menuController->getDisplayedCutMenu();
-        return view('cutHouseMoon.mypage.reservate.bookingThird', compact('startTimes', 'menus'));
+        $emptyTimes = [];
+        foreach ($startTimes as $startTime) {
+            if (!in_array($startTime['id'], $unableTime)) {
+                $emptyTimes[] = $startTime;
+            }
+        }
+        $differences = [];
+        // 次の空き時間idとの差を計算し、代入
+        for ($i = 0; $i <= count($emptyTimes) - 1; $i++) {
+            if ($i === count($emptyTimes) - 1) {
+                $differences[$i] = 0;
+            } else {
+                $differences[$i] = $emptyTimes[$i + 1]['id'] - $emptyTimes[$i]['id'];
+            }
+        }
+        // 空いている時間ブロック数のカウント
+        for ($i = 0;  $i <= count($emptyTimes) - 1; $i++) {
+            $emptyBlock = 0;
+            for ($j = $i; $j <= count($differences) - 1; $j++) {
+                if ($differences[$j] === 1) {
+                    $emptyBlock++;
+                } else {
+                    $emptyTimes[$i]['emptyBlock'] = $emptyBlock;
+                    break;
+                }
+            }
+        }
+        // メニューに応じた予約可能時間を取得
+        $ableTimes = [];
+        foreach ($emptyTimes as $emptyTime) {
+            if ($emptyTime['emptyBlock'] >= session('doingTime')) {
+                $ableTimes[] = $emptyTime;
+            }
+        }
+        return view('cutHouseMoon.mypage.reservate.bookingThird', compact('menu', 'ableTimes'));
     }
 
-    public function doBooking(Request $request) {
+    public function validateStartTime(Request $request) {
         // ダイレクトアクセス対策
         $referer = $request->header('referer');
         if (strpos($referer, 'bookingThird') == false) {
             return redirect(route('mypage'));
         }
-        // 処理
-        if (!empty(session('date'))) {
-            $this->reservationController->addReservation();
-            session()->forget(['date', 'startTime', 'menu']);
-            return view('cutHouseMoon.mypage.reservate.bookingFinish');
-        } else {
-            // 二重送信対策
-            return redirect(route('mypage'));
-        }
+        // 入浴内容の保存
+        $request->session()->put('startTime', $request->start_time);
+        // バリデーション
+        $request->validate([
+            'start_time' => 'required',
+        ], [
+            'start_time.required' => '開始時間を選択してください',
+        ]);
+        return redirect(route('bookingForth'));
     }
 
-    public function history() {
-        $histories = $this->reservationController->getCustomerHistory();
-        return view('cutHouseMoon.mypage.history.history', compact('histories'));
+    public function bookingForth(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'booking') == false) {
+            return redirect(route('mypage'));
+        }
+        $menu = $this->menuController->getSelectedMenu(session('menu'));
+        $startTime = $this->startTimeController->getSelectedStartTime(session('startTime'));
+        return view('cutHouseMoon.mypage.reservate.bookingForth', compact('menu', 'startTime'));
+    }
+
+    public function booking(Request $request) {
+        // ダイレクトアクセス対策
+        $referer = $request->header('referer');
+        if (strpos($referer, 'bookingForth') == false) {
+            return redirect(route('mypage'));
+        }
+        $reservation = $this->reservationController->getMaximumNo();
+        if ($reservation) {
+            $registNo = $reservation['no'] + 1;
+        } else {
+            $registNo = 1;
+        }
+        $reservation = $this->reservationController->addHeadReservation($registNo);
+        for ($i = 1; $i <= session('doingTime'); $i++) {
+            $reservation = $this->reservationController->addNotHeadReservation($registNo, $i);
+        }
+        session()->forget(['startTime', 'menu', 'doingTime', 'date']);
+        return view('cutHouseMoon.mypage.reservate.booking');
     }
 }

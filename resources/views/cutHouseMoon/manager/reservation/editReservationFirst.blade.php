@@ -38,7 +38,7 @@
                     </div>
                     <div class="confirm-body">
                         <p>
-                            {{ str_replace('/0', '/', str_replace('-', '/', session('date'))) }}({{ getDayOfWeek(session('date')) }})
+                            {{ str_replace('/0', '/', str_replace('-', '/', session('nowDate'))) }}({{ getDayOfWeek(session('nowDate')) }})
                         </p>
                     </div>
                 </div>
@@ -62,15 +62,58 @@
         </div>
         <div class="content-container">
             <h4>予約変更</h4>
-            <form action="{{ route('editReservationSecond') }}" method="GET">
-                <input type="hidden" name="id" value="{{ session('id') }}" id="reservation-id">
-                <label for="date" class="form-label">日付</label>
-                <input id="date" type="date" name="date" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
-                <p class="rice-mark">
-                    ※当日から2週間後までの予約が可能です。<br>
-                    毎月、第一日曜日・毎週月曜日はお休みのため予約できません。<br>
-                    毎年、1/1～1/4は正月休み・8/13～8/15はお盆休みのため予約できません。
-                </p>
+            <form action="{{ route('validateMenuOnEditReservation') }}" method="GET">
+                <div class="form-content">
+                    <label for="newMenu" class="form-label">カットメニュー</label>
+                    @if($errors->has('newMenu'))
+                        @foreach($errors->get('newMenu') as $message)
+                        <p class="validation-error-message">
+                            {{ $message }}
+                        </p>
+                        @endforeach
+                    @endif
+                    <select name="newMenu" id="newMenu" class="form-select">
+                        <option hidden value="">選択してください</option>
+                        @foreach ($menus as $menu)
+                            @if (session('newMenu'))
+                                @if (session('newMenu') == $menu['id'])
+                                    <option value="{{ $menu['id'] }}" selected>
+                                        {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                    </option>
+                                @else
+                                    <option value="{{ $menu['id'] }}">
+                                        {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                    </option>
+                                @endif
+                            @elseif (old('newMenu'))
+                                @if (old('newMenu') == $menu['id'])
+                                    <option value="{{ $menu['id'] }}" selected>
+                                        {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                    </option>
+                                @else
+                                    <option value="{{ $menu['id'] }}">
+                                        {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                    </option>
+                                @endif
+                            @else
+                                @if (session('menu_id') == $menu['id'])
+                                        <option value="{{ $menu['id'] }}" selected>
+                                            {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                        </option>
+                                    @else
+                                        <option value="{{ $menu['id'] }}">
+                                            {{ $menu['name'] }}　{{ number_format($menu['price']) }}円
+                                        </option>
+                                    @endif
+                                @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-content" style="margin-top: 20px">
+                    <button type="submit" class="btn btn-primary">
+                        次へ
+                    </button>
+                </div>
             </form>
             <div class="back-btn-container">
                 <a href="{{ route('allReservation') }}" class="btn btn-link back-btn">予約一覧へ</a>

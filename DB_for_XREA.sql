@@ -41,8 +41,11 @@ INSERT INTO menus (name, price, doing_time,  display) VALUES
 -- テーブル：reservationsを作成
 CREATE TABLE reservations (
     id INT(11) AUTO_INCREMENT NOT NULL,
+    no INT NOT NULL,
     user_id INT(11) NOT NULL,
     menu_id INT(11) NOT NULL,
+    remaining_time INT NOT NULL,
+    head INT(1) NOT NULL,
     date DATE NOT NULL,
     start_time_id INT(11) NOT NULL,
     status INT(1) NOT NULL DEFAULT 0,
@@ -107,66 +110,6 @@ INSERT INTO start_times (time, status) VALUES
     ('22:30:00', 1),
     ('23:00:00', 1),
     ('23:30:00', 1);
-
--- テーブル：end_timesを作成
-CREATE TABLE end_times (
-    id INT(11) AUTO_INCREMENT NOT NULL,
-    time TIME NOT NULL UNIQUE,
-    status INT(1) NOT NULL,
-    PRIMARY KEY (id)
-);
-
--- テーブル：end_timesにデータ挿入
-INSERT INTO end_times (time, status) VALUES
-    ('00:00:00', 1),
-    ('00:30:00', 1),
-    ('01:00:00', 1),
-    ('01:30:00', 1),
-    ('02:00:00', 1),
-    ('02:30:00', 1),
-    ('03:00:00', 1),
-    ('03:30:00', 1),
-    ('04:00:00', 1),
-    ('04:30:00', 1),
-    ('05:00:00', 1),
-    ('05:30:00', 1),
-    ('06:00:00', 1),
-    ('06:30:00', 1),
-    ('07:00:00', 1),
-    ('07:30:00', 1),
-    ('08:00:00', 1),
-    ('08:30:00', 1),
-    ('09:00:00', 0),
-    ('09:30:00', 0),
-    ('10:00:00', 0),
-    ('10:30:00', 0),
-    ('11:00:00', 0),
-    ('11:30:00', 0),
-    ('12:00:00', 0),
-    ('12:30:00', 0),
-    ('13:00:00', 0),
-    ('13:30:00', 0),
-    ('14:00:00', 0),
-    ('14:30:00', 0),
-    ('15:00:00', 0),
-    ('15:30:00', 0),
-    ('16:00:00', 0),
-    ('16:30:00', 0),
-    ('17:00:00', 0),
-    ('17:30:00', 0),
-    ('18:00:00', 0),
-    ('18:30:00', 0),
-    ('19:00:00', 0),
-    ('19:30:00', 0),
-    ('20:00:00', 1),
-    ('20:30:00', 1),
-    ('21:00:00', 1),
-    ('21:30:00', 1),
-    ('22:00:00', 1),
-    ('22:30:00', 1),
-    ('23:00:00', 1),
-    ('23:30:00', 1);
-
 
 
 -- テーブル：usersを作成
