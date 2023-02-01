@@ -19,6 +19,9 @@ class ReservationController extends Controller {
         try {
             DB::beginTransaction();
             $reservations = Reservation::all();
+            $sql = Reservation::query();
+            $sql->where('head', 0);
+            $reservations = $sql->get();
             DB::commit();
             return $reservations;
         } catch (Exception $e) {
@@ -33,7 +36,7 @@ class ReservationController extends Controller {
     public function getYetReservations() {
         try {
             DB::beginTransaction();
-            $reservations = Reservation::where('status', '0')->orderBy('date', 'ASC')->orderBy('start_time_id', 'ASC')->paginate(10);
+            $reservations = Reservation::where('head', 0)->where('status', '0')->orderBy('date', 'ASC')->orderBy('start_time_id', 'ASC')->paginate(10);
             DB::commit();
             return $reservations;
         } catch (Exception $e) {
@@ -63,13 +66,15 @@ class ReservationController extends Controller {
         }
     }
 
-    // 管理者が予約追加
-    public function managerAddReservation() {
+    public function addHeadReservation($registNo) {
         try {
             DB::beginTransaction();
             $reservation = new Reservation();
-            $reservation->user_id = session('user_id');
+            $reservation->no = $registNo;
+            $reservation->user_id = Auth::user()->user_id;
             $reservation->menu_id = session('menu');
+            $reservation->remaining_time = session('doingTime') + 1;
+            $reservation->head = 0;
             $reservation->date = session('date');
             $reservation->start_time_id = session('startTime');
             $reservation->save();
@@ -82,13 +87,79 @@ class ReservationController extends Controller {
         }
     }
 
-    // 施術完了した予約の状態を変更
-    public function finishStatus($id) {
+    public function addNotHeadReservation($registNo, $i) {
         try {
             DB::beginTransaction();
-            $reservation = Reservation::find($id);
-            $reservation->status = 1;
+            $reservation = new Reservation();
+            $reservation->no = $registNo;
+            $reservation->user_id = Auth::user()->user_id;
+            $reservation->menu_id = session('menu');
+            $reservation->remaining_time = session('doingTime') + 1 - $i;
+            $reservation->head = 1;
+            $reservation->date = session('date');
+            $reservation->start_time_id = session('startTime') + $i;
             $reservation->save();
+            DB::commit();
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+    public function addHeadReservationOnManager($registNo) {
+        try {
+            DB::beginTransaction();
+            $reservation = new Reservation();
+            $reservation->no = $registNo;
+            $reservation->user_id = session('user_id');
+            $reservation->menu_id = session('menu');
+            $reservation->remaining_time = session('doingTime') + 1;
+            $reservation->head = 0;
+            $reservation->date = session('date');
+            $reservation->start_time_id = session('startTime');
+            $reservation->save();
+            DB::commit();
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    public function addNotHeadReservationOnManager($registNo, $i) {
+        try {
+            DB::beginTransaction();
+            $reservation = new Reservation();
+            $reservation->no = $registNo;
+            $reservation->user_id = session('user_id');
+            $reservation->menu_id = session('menu');
+            $reservation->remaining_time = session('doingTime') + 1 - $i;
+            $reservation->head = 1;
+            $reservation->date = session('date');
+            $reservation->start_time_id = session('startTime') + $i;
+            $reservation->save();
+            DB::commit();
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    // 施術完了した予約の状態を変更
+    public function finishStatus($no) {
+        try {
+            DB::beginTransaction();
+            $sql = Reservation::query();
+            $sql->where('no', $no);
+            $reservations = $sql->get();
+            foreach ($reservations as $reservation) {
+                $reservation->status = 1;
+                $reservation->save();
+            }
             DB::commit();
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
@@ -102,20 +173,8 @@ class ReservationController extends Controller {
     public function getCustomerHistory() {
         try {
             DB::beginTransaction();
-            // $sql = Reservation::query();
-            // $sql->where('user_id', Auth::user()->user_id);
-            // $sql->where('status', 1);
-            // $sql->orderBy('date', 'ASC');
-            // $reservations = $sql->get();
-            $reservations = Reservation::where('user_id', Auth::user()->user_id)->where('status', 1)->orderBy('date', 'DESC')->orderBy('start_time_id', 'DESC')->paginate(5);
+            $reservations = Reservation::where('user_id', Auth::user()->user_id)->where('head', 0)->where('status', 1)->orderBy('date', 'DESC')->orderBy('start_time_id', 'DESC')->paginate(5);
             DB::commit();
-            // 取得データを日時が早い順に並び替え
-            // $reservations = $this->sortDateTime($reservations);
-            // $countOfHistory = count($reservations);
-            // $histories = [];
-            // for ($i = $countOfHistory - 1; $i >= 0; $i--) {
-            //     $histories[] = $reservations[$i];
-            // }
             return $reservations;
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
@@ -131,6 +190,7 @@ class ReservationController extends Controller {
             DB::beginTransaction();
             $sql = Reservation::query();
             $sql->where('user_id', Auth::user()->user_id);
+            $sql->where('head', 0);
             $sql->where('status', 0);
             $sql->orderBy('date', 'ASC');
             $reservations = $sql->get();
@@ -151,6 +211,7 @@ class ReservationController extends Controller {
             DB::beginTransaction();
             $sql = Reservation::query();
             $sql->where('user_id', $id);
+            $sql->where('head', 0);
             $sql->where('status', 0);
             $sql->orderBy('date', 'ASC');
             $reservations = $sql->get();
@@ -171,6 +232,7 @@ class ReservationController extends Controller {
             DB::beginTransaction();
             $sql = Reservation::query();
             $sql->where('date', $date);
+            $sql->where('head', 0);
             $sql->where('status', 0);
             $sql->with(['startTime']);
             $reservations = $sql->get();
@@ -186,14 +248,15 @@ class ReservationController extends Controller {
         }
     }
 
-
-    // 指定されたidの予約を取得
-    public function getSelectedReservation($id) {
+    // 指定されたnoの予約を取得
+    public function getSelectedReservation($no) {
         try {
             DB::beginTransaction();
-            $reservation = Reservation::find($id);
+            $sql = Reservation::query();
+            $sql->where('no', $no);
+            $reservations = $sql->get();
             DB::commit();
-            return $reservation;
+            return $reservations;
         } catch (Exception $e) {
             $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
             DB::rollBack();
@@ -220,6 +283,37 @@ class ReservationController extends Controller {
         }
     }
 
+    // noカラムの最大値を取得
+    public function getMaximumNo() {
+        try {
+            DB::beginTransaction();
+            $sql = Reservation::query();
+            $sql->orderBy('no', 'DESC');
+            $reservation = $sql->first();
+            DB::commit();
+            return $reservation;
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    public function deleteReservation($no) {
+        try {
+            DB::beginTransaction();
+            $sql = Reservation::query();
+            $sql->where('no', $no);
+            $sql->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
 
     // コントローラー内の関数
     // 取得データを時間が早い順に並び替え

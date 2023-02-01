@@ -62,15 +62,14 @@
         </div>
         <div class="content-container">
             <h4>予約変更</h4>
-
             <div class="form-content">
                 <label class="form-label">カットメニュー</label>
                 <input value="{{ $menu['name'] }}　{{ number_format($menu['price']) }}円" class="form-control" disabled>
             </div>
-            <form action="{{ route('editReservationThird') }}" method="GET">
+            <form action="{{ route('bookingThird') }}" method="GET" style="margin-top: 20px">
                 <div class="form-content">
                     <label for="date" class="form-label">日付</label>
-                    <input id="date" type="date" name="date" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
+                    <input type="date" id="date" name="date" value="{{ session('date') }}" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
                     <p class="date-info rice-mark">
                         ※翌日から2週間後までの予約が可能です。<br>
                         当日の予約はお電話にてお願いいたします。<br>
@@ -79,9 +78,54 @@
                     </p>
                 </div>
             </form>
-            <form action="{{ route('editReservationFirst') }}" method="get" style="margin-top: 20px">
-                <input type="hidden" name="no" value="{{ session('no') }}">
-                <button type="submit" class="btn btn-secondary modify-btn">修正</button>
+            <form action="{{ route('validateStartTimeOnEditReservation') }}" method="GET" style="margin-top: 20px">
+                <div class="form-content">
+                    <label for="start_time" class="form-label">開始時間</label>
+                    @if($errors->has('start_time'))
+                        @foreach($errors->get('start_time') as $message)
+                        <p class="validation-error-message">
+                            {{ $message }}
+                        </p>
+                        @endforeach
+                    @endif
+                    <select name="start_time" id="start_time" class="form-select">
+                        <option hidden value="">選択してください</option>
+                        @foreach ($ableTimes as $ableTime)
+                            @if (!empty(session('startTime')))
+                                @if (session('startTime') == $ableTime['id'])
+                                    <option value="{{ $ableTime['id'] }}" selected>
+                                        {{ ltrim(substr($ableTime['time'], 0, 5), 0) }}
+                                    </option>
+                                @else
+                                    <option value="{{ $ableTime['id'] }}">
+                                        {{ ltrim(substr($ableTime['time'], 0, 5), 0) }}
+                                    </option>
+                                @endif
+                            @else
+                                @if (old('start_time') == $ableTime['id'])
+                                    <option value="{{ $ableTime['id'] }}" selected>
+                                        {{ ltrim(substr($ableTime['time'], 0, 5), 0) }}
+                                    </option>
+                                @else
+                                    <option value="{{ $ableTime['id'] }}">
+                                        {{ ltrim(substr($ableTime['time'], 0, 5), 0) }}
+                                    </option>
+                                @endif
+                            @endif
+                        @endforeach
+                    </select>
+                    <p class="date-info rice-mark">
+                        ※9:00～18:30の間で30分毎に予約可能です。<br>
+                        予約可能な時間のみ表示されます。（表示されない時間は既に予約が入っています。）
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <div class="form-content">
+                        <button type="submit" class="btn btn-primary">
+                            次へ
+                        </button>
+                    </div>
+                </div>
             </form>
             <div class="back-btn-container">
                 <a href="{{ route('allReservation') }}" class="btn btn-link back-btn">予約一覧へ</a>

@@ -38,13 +38,13 @@
                             <td>{{ $reservation['menu']['name'] }}</td>
                             <td>
                                 <form action="{{ route('editReservationFirst') }}" method="get">
-                                    <input type="hidden" name="id" value="{{ $reservation['id'] }}">
+                                    <input type="hidden" name="no" value="{{ $reservation['no'] }}">
                                     <button type="submit" class="btn btn-link">編集</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="{{ route('finishReservation') }}" method="get">
-                                    <input type="hidden" name="id" value="{{ $reservation['id'] }}">
+                                    <input type="hidden" name="no" value="{{ $reservation['no'] }}">
                                     <button type="submit" class="btn btn-link finish-reservation" value="{{ $i }}">済</button>
                                 </form>
                             </td>
