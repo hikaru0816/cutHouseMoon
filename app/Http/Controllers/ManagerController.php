@@ -37,7 +37,7 @@ class managerController extends Controller {
         // 待ち状況の取得
         $waitingStatuses = $this->waitingStatusController->getWaitingStatuses();
         // 本日の予約を取得
-        $today = $this->reservationController->getSelectedDateReservations(date('Y-m-d'));
+        $today = $this->reservationController->getTodayReservations(date('Y-m-d'));
         session()->forget('id');
         return view('cutHouseMoon.manager.manager', compact('emptyStatuses', 'waitingStatuses', 'today'));
     }

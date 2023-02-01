@@ -226,8 +226,29 @@ class ReservationController extends Controller {
         }
     }
 
-    // 引数の日付の予約を取得
+    // 引数の日付の予約を取得（予約作成用）
     public function getSelectedDateReservations($date) {
+        try {
+            DB::beginTransaction();
+            $sql = Reservation::query();
+            $sql->where('date', $date);
+            $sql->where('status', 0);
+            $sql->with(['startTime']);
+            $reservations = $sql->get();
+            DB::commit();
+            // 取得データを時間が早い順に並び替え
+            return $this->sortTime($reservations);
+            return $reservations;
+        } catch (Exception $e) {
+            $errorMessage = "DBからデータの取得ができませんでした: {$e->getMessage()}";
+            DB::rollBack();
+            // エラーを表示
+            return view('cutHouseMoon.error', compact('errorMessage'));
+        }
+    }
+
+    // 引数の日付の予約を取得（本日の予約表示用）
+    public function getTodayReservations($date) {
         try {
             DB::beginTransaction();
             $sql = Reservation::query();
