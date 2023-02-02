@@ -126,7 +126,7 @@ class managerController extends Controller {
             return redirect(route('allReservation'));
         }
         $menu = $this->menuController->getSelectedMenu(session('newMenu'));
-        return view('cutHouseMoon..manager.reservation.editReservationSecond', compact('menu'));
+        return view('cutHouseMoon.manager.reservation.editReservationSecond', compact('menu'));
     }
 
     // 予約の編集画面3へ
@@ -197,7 +197,7 @@ class managerController extends Controller {
                 $ableTimes[] = $emptyTime;
             }
         }
-        return view('cutHouseMoon..manager.reservation.editReservationThird', compact('menu', 'ableTimes'));
+        return view('cutHouseMoon.manager.reservation.editReservationThird', compact('menu', 'ableTimes'));
     }
 
     public function validateStartTimeOnEditReservation(Request $request) {
@@ -225,7 +225,7 @@ class managerController extends Controller {
         }
         $menu = $this->menuController->getSelectedMenu(session('newMenu'));
         $startTime = $this->startTimeController->getSelectedStartTime(session('startTime'));
-        return view('cutHouseMoon..manager.reservation.editReservationForth', compact('menu', 'startTime'));
+        return view('cutHouseMoon.manager.reservation.editReservationForth', compact('menu', 'startTime'));
     }
 
     public function editReservation(Request $request) {
