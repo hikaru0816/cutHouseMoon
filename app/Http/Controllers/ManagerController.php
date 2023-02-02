@@ -283,7 +283,7 @@ class managerController extends Controller {
 
     // 予約一覧表示
     public function showAllReservation(Request $request) {
-        $request->session()->forget(['kana', 'name', 'date', 'time', 'menu', 'id', 'menu_id']);
+        $request->session()->forget(['kana', 'name', 'date', 'time', 'menu', 'id', 'menu_id', 'no']);
         $reservations = $this->reservationController->getYetReservations();
         session()->forget('id');
         return view('cutHouseMoon.manager.reservation.allReservations', compact('reservations'));
