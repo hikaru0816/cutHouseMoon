@@ -66,7 +66,7 @@
                 <label class="form-label">カットメニュー</label>
                 <input value="{{ $menu['name'] }}　{{ number_format($menu['price']) }}円" class="form-control" disabled>
             </div>
-            <form action="{{ route('bookingThird') }}" method="GET" style="margin-top: 20px">
+            <form action="{{ route('editReservationThird') }}" method="GET" style="margin-top: 20px">
                 <div class="form-content">
                     <label for="date" class="form-label">日付</label>
                     <input type="date" id="date" name="date" value="{{ session('date') }}" required class="form-control" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('2 weeks')) }}" onchange="submit(this.form)">
