@@ -1,46 +1,9 @@
 # カットハウスムーンHP
 カットハウスムーンという床屋さんのホームページです。
-
-## 概要
-施術の予約ができるホームページを作成しました。
-ログインユーザーは管理者とお客様に分かれており、それぞれでログイン可能です。
-
-## ログイン情報
-### 管理者アカウント
-- メールアドレス：manager@email.com
-- パスワード：manager
-### お客様アカウント①
-- customer001@email.com
-- パスワード：customer
-### お客様アカウント②
-- customer002@email.com
-- パスワード：customer
-
-## 未ログインでできること
-- ホームページの閲覧
-
-## 管理者アカウントでできること
-- ホームページの閲覧
-- お客様の予約を追加
-- お客様の予約を編集
-- 空席・待ち状況の更新
-- カットメニューの追加・編集
-- 会員登録済みのお客様一覧確認
-
-## お客様アカウントでできること
-- ホームページの閲覧
-- 施術の予約
+[HPへ](http://www.woogamihikaru.shop/cutHouseMoon/index)
 
 ## 環境
 XAMPP/Laravel 5.6.40/PHP 7.4.30/MySQL/
 
 ## データベース
-お使いのphpMyAdminにて "DB.sql" のインポートをお願いします。
-- データベース名：cut_house_moon
-- テーブル：全部で下記の6種類
-1. empty_statuses
-2. menus
-3. reservations
-4. start_times
-5. users
-6. waiting_statues
+サーバー側のphpMyAdminでDB_for_XREA.sqlをインポートする必要あり。
